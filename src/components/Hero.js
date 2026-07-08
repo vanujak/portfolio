@@ -16,7 +16,7 @@ export default function Hero() {
         {/* Main Heading */}
         <h1 className="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-zinc-900 dark:text-zinc-50 mb-6 leading-tight">
           Building Reliable<br />
-          <span className="whitespace-nowrap bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-violet-500 dark:from-indigo-400 dark:to-violet-400">
+          <span className="sm:whitespace-nowrap bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-violet-500 dark:from-indigo-400 dark:to-violet-400">
             Cloud & DevOps Solutions
           </span>
         </h1>
@@ -45,8 +45,8 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Elegant visual detail at the bottom */}
-      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-zinc-400 dark:text-zinc-600 animate-bounce">
+      {/* Elegant visual detail at the bottom (hidden on mobile to prevent overlapping) */}
+      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 hidden sm:flex flex-col items-center gap-2 text-zinc-400 dark:text-zinc-600 animate-bounce">
         <span className="text-xs uppercase tracking-widest font-bold">
           Scroll Down
         </span>

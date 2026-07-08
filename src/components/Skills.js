@@ -37,7 +37,7 @@ export default function Skills() {
   ];
 
   return (
-    <section id="skills" className="py-24 bg-zinc-50 dark:bg-zinc-900/30">
+    <section id="skills" className="py-24 bg-background-secondary">
       <div className="max-w-6xl mx-auto px-6">
         <div className="text-center max-w-2xl mx-auto mb-16">
           <span className="text-xs uppercase tracking-widest font-bold text-indigo-600 dark:text-indigo-400">
@@ -56,7 +56,7 @@ export default function Skills() {
           {skillCategories.map((category, index) => (
             <div
               key={index}
-              className="bg-white dark:bg-zinc-900 border border-zinc-200/50 dark:border-zinc-800/50 rounded-2xl p-6 shadow-sm flex flex-col h-full"
+              className="bg-background border border-zinc-200/50 dark:border-zinc-800/50 rounded-2xl p-6 shadow-sm flex flex-col h-full"
             >
               <h3 className="text-lg font-bold text-zinc-900 dark:text-zinc-50 border-b border-zinc-200/50 dark:border-zinc-800/50 pb-4 mb-6">
                 {category.title}

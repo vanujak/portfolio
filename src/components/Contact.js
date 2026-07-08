@@ -83,7 +83,7 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="py-24 bg-white dark:bg-black">
+    <section id="contact" className="py-24 bg-background">
       <div className="max-w-6xl mx-auto px-6">
         <div className="text-center max-w-2xl mx-auto mb-16">
           <span className="text-xs uppercase tracking-widest font-bold text-indigo-600 dark:text-indigo-400">
@@ -236,7 +236,7 @@ export default function Contact() {
           <div className="lg:col-span-7">
             <form
               onSubmit={handleSubmit}
-              className="bg-zinc-50 dark:bg-zinc-900/40 border border-zinc-200/50 dark:border-zinc-800/50 rounded-3xl p-6 sm:p-8 space-y-6"
+              className="bg-background-secondary border border-zinc-200/50 dark:border-zinc-800/50 rounded-3xl p-6 sm:p-8 space-y-6"
             >
               <div>
                 <label

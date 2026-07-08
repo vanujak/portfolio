@@ -24,7 +24,7 @@ export default function Projects() {
   ];
 
   return (
-    <section id="projects" className="py-24 bg-white dark:bg-black">
+    <section id="projects" className="py-24 bg-background">
       <div className="max-w-6xl mx-auto px-6">
         <div className="text-center max-w-2xl mx-auto mb-16">
           <span className="text-xs uppercase tracking-widest font-bold text-indigo-600 dark:text-indigo-400">
@@ -43,10 +43,10 @@ export default function Projects() {
           {projects.map((project, index) => (
             <div
               key={index}
-              className="group flex flex-col h-full bg-zinc-50 dark:bg-zinc-900/40 border border-zinc-200/50 dark:border-zinc-800/50 rounded-2xl p-6 hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
+              className="group flex flex-col h-full bg-background-secondary border border-zinc-200/50 dark:border-zinc-800/50 rounded-2xl p-6 hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
             >
               {/* Card visual header */}
-              <div className="h-44 w-full bg-gradient-to-br from-indigo-100 to-indigo-50 dark:from-zinc-850 dark:to-zinc-900 rounded-xl mb-6 flex items-center justify-center relative overflow-hidden">
+              <div className="h-44 w-full bg-background dark:bg-zinc-900/50 rounded-xl mb-6 flex items-center justify-center relative overflow-hidden">
                 {/* Decorative coding icon */}
                 <svg
                   className="w-12 h-12 text-indigo-500/60 dark:text-indigo-400/40 group-hover:scale-110 transition-transform duration-300"
