@@ -18,8 +18,7 @@ export default function Contact() {
   const [status, setStatus] = useState(null);
 
   // To make the form work, register for a free account at https://formspree.io
-  // Create a form, and replace "YOUR_FORMSPREE_ID" with your actual form ID.
-  const FORMSPREE_ID = "mwvddkvj";
+  const FORMSPREE_ID = process.env.NEXT_PUBLIC_FORMSPREE_ID || "mwvddkvj";
 
   const handleSubmit = async (e) => {
     e.preventDefault();
