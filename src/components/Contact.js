@@ -17,24 +17,33 @@ export default function Contact() {
   });
   const [status, setStatus] = useState(null);
 
-  // To make the form work, register for a free account at https://formspree.io
-  const FORMSPREE_ID = process.env.NEXT_PUBLIC_FORMSPREE_ID || "mwvddkvj";
+  // Get your free access key at https://web3forms.com
+  const WEB3FORMS_KEY = process.env.NEXT_PUBLIC_WEB3FORMS_KEY || "YOUR_ACCESS_KEY";
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setStatus("sending");
 
     try {
-      const response = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
+      const response = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
         },
-        body: JSON.stringify(formState),
+        body: JSON.stringify({
+          access_key: WEB3FORMS_KEY,
+          name: formState.name,
+          email: formState.email,
+          message: formState.message,
+          subject: "New Message from Portfolio Website",
+          from_name: "Vanuja's Portfolio",
+        }),
       });
 
-      if (response.ok) {
+      const data = await response.json();
+
+      if (response.ok && data.success) {
         setStatus("success");
         setFormState({ name: "", email: "", message: "" });
       } else {
