@@ -17,33 +17,44 @@ export default function Contact() {
   });
   const [status, setStatus] = useState(null);
 
-  // Get your free access key at https://web3forms.com
-  const WEB3FORMS_KEY = process.env.NEXT_PUBLIC_WEB3FORMS_KEY || "YOUR_ACCESS_KEY";
+  const FORMSPREE_ID = process.env.NEXT_PUBLIC_FORMSPREE_ID || "mwvddkvj";
+  const EMAILJS_SERVICE_ID = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || "YOUR_SERVICE_ID";
+  const EMAILJS_PUBLIC_KEY = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || "YOUR_PUBLIC_KEY";
+  const EMAILJS_VISITOR_TEMPLATE = process.env.NEXT_PUBLIC_EMAILJS_VISITOR_TEMPLATE || "YOUR_VISITOR_TEMPLATE_ID";
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setStatus("sending");
 
     try {
-      const response = await fetch("https://api.web3forms.com/submit", {
+      // 1. Send notification to yourself via Formspree
+      const resNotification = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Accept: "application/json",
+          "Accept": "application/json",
+        },
+        body: JSON.stringify(formState),
+      });
+
+      // 2. Send automatic confirmation (auto-reply) to the visitor via EmailJS
+      const resAutoReply = await fetch("https://api.emailjs.com/api/v1.0/email/send", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          access_key: WEB3FORMS_KEY,
-          name: formState.name,
-          email: formState.email,
-          message: formState.message,
-          subject: "New Message from Portfolio Website",
-          from_name: "Vanuja's Portfolio",
+          service_id: EMAILJS_SERVICE_ID,
+          template_id: EMAILJS_VISITOR_TEMPLATE,
+          user_id: EMAILJS_PUBLIC_KEY,
+          template_params: {
+            from_name: formState.name,
+            reply_to: formState.email,
+          },
         }),
       });
 
-      const data = await response.json();
-
-      if (response.ok && data.success) {
+      if (resNotification.ok && resAutoReply.ok) {
         setStatus("success");
         setFormState({ name: "", email: "", message: "" });
       } else {
