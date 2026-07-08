@@ -15,16 +15,19 @@ export default function Hero() {
 
         {/* Main Heading */}
         <h1 className="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-zinc-900 dark:text-zinc-50 mb-6 leading-tight">
-          Crafting exceptional{' '}
-          <span className="bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-violet-500 dark:from-indigo-400 dark:to-violet-400">
-            digital experiences
+          Building Reliable<br />
+          <span className="whitespace-nowrap bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-violet-500 dark:from-indigo-400 dark:to-violet-400">
+            Cloud & DevOps Solutions
           </span>
         </h1>
 
         {/* Subtitle */}
         <p className="text-lg sm:text-xl text-zinc-600 dark:text-zinc-400 max-w-2xl mx-auto mb-10 leading-relaxed">
-          Hi, I'm a passionate full-stack developer dedicated to building responsive,
-          high-performance web applications with clean architecture and modern designs.
+          Hi, I'm Vanuja Karunaratne, a Computer Engineering undergraduate at
+          the University of Ruhuna with a passion for DevOps, cloud
+          infrastructure, automation, and full-stack web development. I enjoy
+          building scalable applications and deploying them using modern DevOps
+          practices.
         </p>
 
         {/* CTA Buttons */}
@@ -46,7 +49,9 @@ export default function Hero() {
 
       {/* Elegant visual detail at the bottom */}
       <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-zinc-400 dark:text-zinc-600 animate-bounce">
-        <span className="text-xs uppercase tracking-widest font-bold">Scroll Down</span>
+        <span className="text-xs uppercase tracking-widest font-bold">
+          Scroll Down
+        </span>
         <svg
           className="w-4 h-4"
           fill="none"
