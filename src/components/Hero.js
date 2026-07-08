@@ -23,11 +23,9 @@ export default function Hero() {
 
         {/* Subtitle */}
         <p className="text-lg sm:text-xl text-zinc-600 dark:text-zinc-400 max-w-2xl mx-auto mb-10 leading-relaxed">
-          Hi, I'm Vanuja Karunaratne, a Computer Engineering undergraduate at
-          the University of Ruhuna with a passion for DevOps, cloud
-          infrastructure, automation, and full-stack web development. I enjoy
-          building scalable applications and deploying them using modern DevOps
-          practices.
+          Hi, I'm Vanuja Karunaratne, a Computer Engineering undergraduate at the University of Ruhuna. 
+          I am passionate about DevOps, automated cloud infrastructure, and MLOps, alongside full-stack development, 
+          focusing on streamlining software delivery and automated model lifecycles.
         </p>
 
         {/* CTA Buttons */}

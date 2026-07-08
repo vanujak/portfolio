@@ -1,25 +1,25 @@
 export default function Projects() {
   const projects = [
     {
-      title: 'AI Content Generator',
-      description: 'An AI-powered application that generates blog posts, copy, and images using OpenAI and Stable Diffusion models.',
-      tags: ['Next.js', 'React', 'Tailwind CSS', 'OpenAI API'],
+      title: 'EasyCase',
+      description: 'A full-stack case management system featuring legal workflows and client data management. Fully containerized with Docker, automated via a Jenkins CI/CD pipeline, and provisioned with Terraform & Ansible.',
+      tags: ['MongoDB', 'Express', 'React', 'Node.js', 'Docker', 'Terraform', 'Ansible', 'Jenkins'],
       link: '#',
-      github: '#',
+      github: 'https://github.com/vanujak',
     },
     {
-      title: 'SaaS Dashboard',
-      description: 'A comprehensive analytics dashboard featuring real-time data streaming, interactive charts, and user management.',
-      tags: ['React', 'Node.js', 'Chart.js', 'PostgreSQL'],
+      title: 'ScaleLab',
+      description: 'A distributed systems simulation platform for designing custom system topologies, executing traffic simulations, and rendering WebSocket-based real-time system monitoring metrics.',
+      tags: ['Next.js', 'TypeScript', 'Tailwind CSS', 'NestJS', 'WebSockets', 'JWT/OAuth'],
       link: '#',
-      github: '#',
+      github: 'https://github.com/vanujak',
     },
     {
-      title: 'E-Commerce Platform',
-      description: 'A headless e-commerce store with full shopping cart functionality, Stripe payment gateway, and dashboard administration.',
-      tags: ['Next.js', 'Stripe', 'Prisma', 'MongoDB'],
+      title: 'SayIDo',
+      description: 'A mobile wedding directory application enabling vendors to manage profiles, bookings, and reservations. Features robust JWT/GraphQL authentication and a real-time chat interface.',
+      tags: ['React Native', 'Expo', 'TypeScript', 'GraphQL', 'WebSockets'],
       link: '#',
-      github: '#',
+      github: 'https://github.com/vanujak',
     },
   ];
 

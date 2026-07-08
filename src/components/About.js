@@ -1,9 +1,9 @@
 export default function About() {
   const stats = [
-    { value: '3+', label: 'Years Experience' },
-    { value: '20+', label: 'Projects Completed' },
-    { value: '99%', label: 'Client Satisfaction' },
-    { value: '10+', label: 'Tools Mastered' },
+    { value: '5+', label: 'DevOps & IaC Tools' },
+    { value: '3', label: 'Core Projects' },
+    { value: '2', label: 'Academic Paths' },
+    { value: '2023', label: 'Started BSc Eng' },
   ];
 
   return (
@@ -16,18 +16,24 @@ export default function About() {
               About Me
             </span>
             <h2 className="text-3xl sm:text-4xl font-bold text-zinc-900 dark:text-zinc-50 mt-2 mb-6">
-              Passionate about building software that solves real-world problems.
+              Bridging the gap between software development and automated infrastructure.
             </h2>
             <div className="space-y-4 text-zinc-600 dark:text-zinc-400 leading-relaxed">
               <p>
-                I am a full-stack software engineer with a strong foundation in modern Javascript frameworks, 
-                serverless architectures, and responsive design patterns. I love turning complex problems 
-                into simple, beautiful, and intuitive designs.
+                I am a Computer Engineering undergraduate at the University of Ruhuna, deeply focused on 
+                DevOps practices and automated cloud deployments. I believe that writing great code is only 
+                half the battle—ensuring it is compiled, tested, containerized, and deployed reliably is what 
+                delivers true value.
               </p>
               <p>
-                My journey began with design and quickly moved to frontend development, where I fell in love with 
-                making components interactive and fast. Today, I build full-stack solutions, specializing in 
-                React, Next.js, Node.js, and modern CSS solutions like Tailwind.
+                My technical toolkit includes provisioning infrastructure as code (IaC) with Terraform and Ansible, 
+                building CI/CD pipelines in Jenkins and GitHub Actions, and containerizing software with Docker. 
+                I also build full-stack solutions with React, Next.js, and Node.js.
+              </p>
+              <p>
+                Currently, I am expanding my boundaries into **MLOps (Machine Learning Operations)**. I am passionate 
+                about automating the integration of machine learning models into production—building robust pipelines 
+                to handle model training, deployment, tracking, and continuous monitoring.
               </p>
             </div>
 
@@ -60,7 +66,7 @@ export default function About() {
                   {"</>"}
                 </div>
                 <h3 className="text-2xl font-bold leading-snug">
-                  Always learning,<br />always building.
+                  Automating systems,<br />streamlining delivery.
                 </h3>
               </div>
 
@@ -69,7 +75,7 @@ export default function About() {
                   Current Focus
                 </span>
                 <p className="text-sm font-medium mt-1">
-                  AI Integration & Performance Optimization
+                  MLOps Pipelines & IaC Automation
                 </p>
               </div>
 
