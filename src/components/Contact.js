@@ -17,7 +17,7 @@ export default function Contact() {
   });
   const [status, setStatus] = useState(null);
 
-  const FORMSPREE_ID = process.env.NEXT_PUBLIC_FORMSPREE_ID || "mwvddkvj";
+  const FORMSPREE_ID = process.env.NEXT_PUBLIC_FORMSPREE_ID || "YOUR_FORMSPREE_ID";
   const EMAILJS_SERVICE_ID = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || "YOUR_SERVICE_ID";
   const EMAILJS_PUBLIC_KEY = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || "YOUR_PUBLIC_KEY";
   const EMAILJS_VISITOR_TEMPLATE = process.env.NEXT_PUBLIC_EMAILJS_VISITOR_TEMPLATE || "YOUR_VISITOR_TEMPLATE_ID";
@@ -48,8 +48,9 @@ export default function Contact() {
           template_id: EMAILJS_VISITOR_TEMPLATE,
           user_id: EMAILJS_PUBLIC_KEY,
           template_params: {
-            from_name: formState.name,
-            reply_to: formState.email,
+            name: formState.name,
+            email: formState.email,
+            title: "Contact Form Inquiry",
           },
         }),
       });
@@ -58,10 +59,18 @@ export default function Contact() {
         setStatus("success");
         setFormState({ name: "", email: "", message: "" });
       } else {
+        if (!resNotification.ok) {
+          const errText = await resNotification.text();
+          console.error("Formspree notification failed:", resNotification.status, errText);
+        }
+        if (!resAutoReply.ok) {
+          const errText = await resAutoReply.text();
+          console.error("EmailJS auto-reply failed:", resAutoReply.status, errText);
+        }
         setStatus("error");
       }
     } catch (error) {
-      console.error("Form submission error:", error);
+      console.error("Form submission network error:", error);
       setStatus("error");
     }
   };
