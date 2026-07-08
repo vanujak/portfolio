@@ -1,6 +1,7 @@
 import Image from "next/image";
 
 export default function About() {
+  const basePath = process.env.NODE_ENV === 'production' ? '/portfolio' : '';
   const stats = [
     { value: "5+", label: "DevOps & IaC Tools" },
     { value: "3", label: "Core Projects" },
@@ -67,7 +68,7 @@ export default function About() {
           <div className="lg:col-span-5 flex justify-center">
             <div className="relative w-64 h-64 sm:w-80 sm:h-80 rounded-3xl overflow-hidden border-4 border-white dark:border-zinc-800 shadow-xl bg-background-secondary">
               <Image
-                src="/profile.JPEG"
+                src={`${basePath}/profile.JPEG`}
                 alt="Vanuja Karunaratne"
                 fill
                 className="object-cover hover:scale-105 transition-transform duration-500"
