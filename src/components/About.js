@@ -67,7 +67,7 @@ export default function About() {
           <div className="lg:col-span-5 flex justify-center">
             <div className="relative w-64 h-64 sm:w-80 sm:h-80 rounded-3xl overflow-hidden border-4 border-white dark:border-zinc-800 shadow-xl bg-background-secondary">
               <Image
-                src="/profile.jpeg"
+                src="/profile.JPEG"
                 alt="Vanuja Karunaratne"
                 fill
                 className="object-cover hover:scale-105 transition-transform duration-500"
