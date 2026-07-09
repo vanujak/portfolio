@@ -17,10 +17,15 @@ export default function Contact() {
   });
   const [status, setStatus] = useState(null);
 
-  const FORMSPREE_ID = process.env.NEXT_PUBLIC_FORMSPREE_ID || "YOUR_FORMSPREE_ID";
-  const EMAILJS_SERVICE_ID = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || "YOUR_SERVICE_ID";
-  const EMAILJS_PUBLIC_KEY = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || "YOUR_PUBLIC_KEY";
-  const EMAILJS_VISITOR_TEMPLATE = process.env.NEXT_PUBLIC_EMAILJS_VISITOR_TEMPLATE || "YOUR_VISITOR_TEMPLATE_ID";
+  const FORMSPREE_ID =
+    process.env.NEXT_PUBLIC_FORMSPREE_ID || "YOUR_FORMSPREE_ID";
+  const EMAILJS_SERVICE_ID =
+    process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || "YOUR_SERVICE_ID";
+  const EMAILJS_PUBLIC_KEY =
+    process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || "YOUR_PUBLIC_KEY";
+  const EMAILJS_VISITOR_TEMPLATE =
+    process.env.NEXT_PUBLIC_EMAILJS_VISITOR_TEMPLATE ||
+    "YOUR_VISITOR_TEMPLATE_ID";
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -28,32 +33,38 @@ export default function Contact() {
 
     try {
       // 1. Send notification to yourself via Formspree
-      const resNotification = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Accept": "application/json",
+      const resNotification = await fetch(
+        `https://formspree.io/f/${FORMSPREE_ID}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+          body: JSON.stringify(formState),
         },
-        body: JSON.stringify(formState),
-      });
+      );
 
       // 2. Send automatic confirmation (auto-reply) to the visitor via EmailJS
-      const resAutoReply = await fetch("https://api.emailjs.com/api/v1.0/email/send", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          service_id: EMAILJS_SERVICE_ID,
-          template_id: EMAILJS_VISITOR_TEMPLATE,
-          user_id: EMAILJS_PUBLIC_KEY,
-          template_params: {
-            name: formState.name,
-            email: formState.email,
-            title: "Contact Form Inquiry",
+      const resAutoReply = await fetch(
+        "https://api.emailjs.com/api/v1.0/email/send",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
           },
-        }),
-      });
+          body: JSON.stringify({
+            service_id: EMAILJS_SERVICE_ID,
+            template_id: EMAILJS_VISITOR_TEMPLATE,
+            user_id: EMAILJS_PUBLIC_KEY,
+            template_params: {
+              name: formState.name,
+              email: formState.email,
+              title: "Contact Form Inquiry",
+            },
+          }),
+        },
+      );
 
       if (resNotification.ok && resAutoReply.ok) {
         setStatus("success");
@@ -61,11 +72,19 @@ export default function Contact() {
       } else {
         if (!resNotification.ok) {
           const errText = await resNotification.text();
-          console.error("Formspree notification failed:", resNotification.status, errText);
+          console.error(
+            "Formspree notification failed:",
+            resNotification.status,
+            errText,
+          );
         }
         if (!resAutoReply.ok) {
           const errText = await resAutoReply.text();
-          console.error("EmailJS auto-reply failed:", resAutoReply.status, errText);
+          console.error(
+            "EmailJS auto-reply failed:",
+            resAutoReply.status,
+            errText,
+          );
         }
         setStatus("error");
       }
@@ -135,10 +154,42 @@ export default function Contact() {
                       Email
                     </div>
                     <a
-                      href="mailto:hello@example.com"
+                      href="mailto:vanujakofficial@gmail.com"
                       className="text-sm font-semibold text-zinc-700 dark:text-zinc-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors"
                     >
                       vanujakofficial@gmail.com
+                    </a>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-4">
+                  <div className="w-10 h-10 rounded-full bg-indigo-50 dark:bg-indigo-950/40 border border-indigo-100/50 dark:border-indigo-900/30 flex items-center justify-center text-indigo-600 dark:text-indigo-400">
+                    <svg
+                      className="w-5 h-5"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"
+                      />
+                    </svg>
+                  </div>
+                  <div>
+                    <div className="text-xs text-zinc-400 dark:text-zinc-500 font-bold uppercase tracking-wider">
+                      Telegram
+                    </div>
+                    <a
+                      href="https://t.me/vanujak"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-sm font-semibold text-zinc-700 dark:text-zinc-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors"
+                    >
+                      @vanujak
                     </a>
                   </div>
                 </div>
