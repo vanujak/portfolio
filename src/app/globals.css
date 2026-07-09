@@ -30,8 +30,8 @@
 }
 
 .dark {
-  --background: #09090b; /* Zinc 950 */
-  --background-secondary: #18181b; /* Zinc 900 */
+  --background: #000000; /* Pure black */
+  --background-secondary: #0a0a0c; /* Deep pitch black secondary */
   --foreground: #fafafa; /* Zinc 50 */
 }
 
@@ -44,4 +44,39 @@ body {
   color: var(--foreground);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
+}
+
+/* Custom ambient glow animations */
+@keyframes ambient-glow {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: translate(15px, -25px) scale(1.05);
+    opacity: 1;
+  }
+}
+
+.animate-ambient-1 {
+  animation: ambient-glow 10s ease-in-out infinite;
+}
+.animate-ambient-2 {
+  animation: ambient-glow 14s ease-in-out infinite;
+}
+.animate-ambient-3 {
+  animation: ambient-glow 12s ease-in-out infinite;
+}
+.animate-ambient-4 {
+  animation: ambient-glow 11s ease-in-out infinite;
+}
+
+/* Global dot grid pattern */
+.bg-dot-grid {
+  background-image: radial-gradient(#8080801c 1.5px, transparent 1.5px);
+  background-size: 32px 32px;
+}
+
+.dark .bg-dot-grid {
+  background-image: radial-gradient(#ffffff08 1.5px, transparent 1.5px);
 }

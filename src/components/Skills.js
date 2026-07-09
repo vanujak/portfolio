@@ -37,7 +37,7 @@ export default function Skills() {
   ];
 
   return (
-    <section id="skills" className="py-24 bg-background-secondary">
+    <section id="skills" className="py-24 bg-background-secondary/30 backdrop-blur-[2px] border-y border-zinc-200/20 dark:border-zinc-800/20">
       <div className="max-w-6xl mx-auto px-6">
         <div className="text-center max-w-2xl mx-auto mb-16">
           <span className="text-xs uppercase tracking-widest font-bold text-indigo-600 dark:text-indigo-400">
