@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 export default function Footer() {
   const currentYear = new Date().getFullYear();
   const [activeModal, setActiveModal] = useState(null); // 'privacy' or 'terms'
+  const [lastUpdated, setLastUpdated] = useState('July 9, 2026');
 
   // Prevent background scrolling when modal is active
   useEffect(() => {
@@ -17,6 +18,30 @@ export default function Footer() {
       document.body.style.overflow = '';
     };
   }, [activeModal]);
+
+  // Fetch latest commit date dynamically from GitHub repository
+  useEffect(() => {
+    const fetchLastCommit = async () => {
+      try {
+        const response = await fetch('https://api.github.com/repos/vanujak/portfolio/commits');
+        if (response.ok) {
+          const commits = await response.json();
+          if (commits && commits.length > 0) {
+            const commitDate = commits[0].commit.committer.date;
+            const formattedDate = new Date(commitDate).toLocaleDateString('en-US', {
+              month: 'long',
+              day: 'numeric',
+              year: 'numeric'
+            });
+            setLastUpdated(formattedDate);
+          }
+        }
+      } catch (err) {
+        console.warn("Failed to fetch last commit date:", err);
+      }
+    };
+    fetchLastCommit();
+  }, []);
 
   return (
     <>
@@ -35,7 +60,7 @@ export default function Footer() {
             &copy; {currentYear} Portfolio. All rights reserved. Built with Next.js and Tailwind CSS.
           </p>
           <p className="text-[10px] text-zinc-400 dark:text-zinc-650 font-medium">
-            Last updated: July 9, 2026
+            Last updated: {lastUpdated}
           </p>
         </div>
 
