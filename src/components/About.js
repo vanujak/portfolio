@@ -19,6 +19,7 @@ export default function About() {
   }, [activeModal]);
   
   const stats = [
+    { id: 'experience', value: "1", label: "Work Internship" },
     { id: 'devops', value: "5+", label: "DevOps & IaC Tools" },
     { id: 'projects', value: "3", label: "Core Projects" },
     { id: 'education', value: "2", label: "Academic Paths" },
@@ -26,6 +27,13 @@ export default function About() {
   ];
 
   const modalContent = {
+    experience: {
+      title: "Professional Work Experience",
+      icon: "💼",
+      items: [
+        { name: "DevOps Intern — SLT-MOBITEL (Telecom)", desc: "June 2026 to December 2026 (6 Months Internship). Tasked with automated deployment workflow configurations, cloud systems operations, container orchestration, and telemetry setups for critical telecommunications services." }
+      ]
+    },
     devops: {
       title: "DevOps & Cloud Automation Stack",
       icon: "🛠️",
@@ -102,12 +110,12 @@ export default function About() {
             </div>
 
             {/* Stats Grid */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 mt-10">
+            <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mt-10">
               {stats.map((stat, index) => (
                 <button
                   key={index}
                   onClick={() => setActiveModal(stat.id)}
-                  className="bg-background p-4 rounded-2xl border border-zinc-200/50 dark:border-zinc-800/50 shadow-sm text-left hover:scale-[1.03] hover:border-indigo-500/50 dark:hover:border-indigo-400/50 hover:shadow-md transition-all duration-200 cursor-pointer w-full group focus:outline-none"
+                  className="bg-background p-4 rounded-2xl border border-zinc-200/50 dark:border-zinc-800/50 shadow-sm text-left hover:scale-[1.03] hover:border-indigo-500/50 dark:hover:border-indigo-400/50 hover:shadow-md transition-all duration-200 cursor-pointer w-full group focus:outline-none col-span-1 last:col-span-2 md:last:col-span-1"
                 >
                   <div className="text-2xl sm:text-3xl font-extrabold text-indigo-600 dark:text-indigo-400 group-hover:text-indigo-500 transition-colors">
                     {stat.value}

@@ -2,6 +2,7 @@ import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import ScrollToTop from "@/components/ScrollToTop";
 import About from "@/components/About";
+import Experience from "@/components/Experience";
 import Projects from "@/components/Projects";
 import Certificates from "@/components/Certificates";
 import CodingStats from "@/components/CodingStats";
@@ -28,6 +29,7 @@ export default function Home() {
       <main className="flex-grow">
         <Hero />
         <About />
+        <Experience />
         <Projects />
         <Certificates />
         <CodingStats />
