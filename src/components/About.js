@@ -65,7 +65,7 @@ export default function About() {
   };
 
   return (
-    <section id="about" className="py-24 bg-background-secondary/30 backdrop-blur-[2px] border-y border-zinc-200/20 dark:border-zinc-800/20 relative">
+    <section id="about" className="py-24 bg-background-secondary/30 border-y border-zinc-200/20 dark:border-zinc-800/20 relative">
       <div className="max-w-6xl mx-auto px-6">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           {/* Text Content */}
