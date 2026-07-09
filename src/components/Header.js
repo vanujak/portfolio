@@ -222,14 +222,20 @@ export default function Header() {
       </div>
 
       {/* Mobile Navigation Panel */}
-      {isOpen && (
-        <div className="md:hidden absolute top-full left-0 right-0 bg-white/95 dark:bg-zinc-950/95 backdrop-blur-lg border-b border-zinc-200/50 dark:border-zinc-800/50 py-4 px-6 flex flex-col gap-4 animate-fade-in">
+      <div 
+        className={`md:hidden absolute top-full left-0 right-0 bg-white/95 dark:bg-zinc-950/95 backdrop-blur-lg border-b border-zinc-200/50 dark:border-zinc-800/50 px-6 flex flex-col overflow-hidden transition-all duration-350 ease-in-out ${
+          isOpen 
+            ? 'opacity-100 translate-y-0 py-4 max-h-[350px] pointer-events-auto visible' 
+            : 'opacity-0 -translate-y-2 py-0 max-h-0 pointer-events-none invisible'
+        }`}
+      >
+        <div className="flex flex-col gap-4 py-2">
           {navLinks.map((link) => (
             <a
               key={link.name}
               href={link.href}
               onClick={() => setIsOpen(false)}
-              className="text-base font-medium text-zinc-700 dark:text-zinc-200 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors py-2"
+              className="text-base font-medium text-zinc-700 dark:text-zinc-200 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors py-1.5"
             >
               {link.name}
             </a>
@@ -237,12 +243,12 @@ export default function Header() {
           <a
             href="#contact"
             onClick={() => setIsOpen(false)}
-            className="text-base font-medium text-white bg-zinc-900 hover:bg-zinc-800 dark:bg-zinc-50 dark:text-zinc-900 dark:hover:bg-zinc-200 px-4 py-2.5 rounded-full text-center transition-all duration-200 shadow-sm"
+            className="text-base font-medium text-white bg-zinc-900 hover:bg-zinc-800 dark:bg-zinc-50 dark:text-zinc-900 dark:hover:bg-zinc-200 px-4 py-2.5 rounded-full text-center transition-all duration-200 shadow-sm mt-2"
           >
             Get in Touch
           </a>
         </div>
-      )}
+      </div>
     </header>
   );
 }
