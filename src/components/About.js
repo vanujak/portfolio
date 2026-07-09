@@ -167,11 +167,11 @@ export default function About() {
             <div className="space-y-6 overflow-y-auto pr-1 flex-grow">
               {modalContent[activeModal].items.map((item, idx) => (
                 <div key={idx} className="space-y-1">
-                  <h4 className="text-sm font-bold text-zinc-850 dark:text-zinc-200 flex items-center gap-2">
+                  <h4 className="text-sm font-bold text-zinc-800 dark:text-zinc-200 flex items-center gap-2">
                     <span className="w-1.5 h-1.5 rounded-full bg-indigo-500" />
                     {item.name}
                   </h4>
-                  <p className="text-sm text-zinc-650 dark:text-zinc-400 leading-relaxed pl-3.5">
+                  <p className="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed pl-3.5">
                     {item.desc}
                   </p>
                 </div>
@@ -182,7 +182,7 @@ export default function About() {
             <div className="mt-6 pt-4 border-t border-zinc-100 dark:border-zinc-800 flex justify-end">
               <button
                 onClick={() => setActiveModal(null)}
-                className="px-6 py-2.5 rounded-full bg-zinc-950 hover:bg-zinc-850 dark:bg-zinc-50 dark:text-zinc-900 dark:hover:bg-zinc-200 text-sm font-semibold transition-colors cursor-pointer shadow-sm"
+                className="px-6 py-2.5 rounded-full bg-zinc-950 text-zinc-50 hover:bg-zinc-900 dark:bg-zinc-50 dark:text-zinc-900 dark:hover:bg-zinc-200 text-sm font-semibold transition-colors cursor-pointer shadow-sm"
               >
                 Close Details
               </button>
