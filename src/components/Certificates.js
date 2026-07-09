@@ -1,45 +1,31 @@
 export default function Certificates() {
+  const basePath = process.env.NODE_ENV === "production" ? "/portfolio" : "";
   const certificates = [
     {
-      title: "AWS Certified Cloud Practitioner",
-      issuer: "Amazon Web Services (AWS)",
-      date: "2025",
-      credentialId: "AWS-CCP-XXXXXX",
-      verifyLink: "https://aws.amazon.com/verification",
-      category: "Cloud"
-    },
-    {
-      title: "Docker & Kubernetes: The Complete Guide",
+      title: "Low Level System Design, Design Patterns & SOLID Principles",
       issuer: "Udemy",
-      date: "2024",
-      credentialId: "UC-XXXXXX",
-      verifyLink: "https://ude.my/UC-XXXXXX",
-      category: "Containers"
+      date: "2026",
+      credentialId: "UC-108eaebf-7829-4316-ae35-0f2320ec9b3b",
+      verifyLink:
+        "https://www.udemy.com/certificate/UC-108eaebf-7829-4316-ae35-0f2320ec9b3b/",
+      category: "Software Engineering",
     },
     {
-      title: "Jenkins CI/CD Pipeline Bootcamp",
-      issuer: "Udemy",
-      date: "2024",
-      credentialId: "UC-YYYYXX",
-      verifyLink: "https://ude.my/UC-YYYYXX",
-      category: "CI/CD"
+      title: "Namaste Node.js",
+      issuer: "Namaste Dev",
+      date: "2026",
+      credentialId: "E8963B37961D36B32D76697DA6B",
+      verifyLink: `${basePath}/certificates/namasteNode.webp`,
+      category: "Backend Development",
     },
     {
-      title: "HashiCorp Terraform Associate",
-      issuer: "Udemy / HashiCorp Prep",
-      date: "2025",
-      credentialId: "UC-ZZZZXX",
-      verifyLink: "https://ude.my/UC-ZZZZXX",
-      category: "IaC"
+      title: "Namaste JavaScript",
+      issuer: "Namaste Dev",
+      date: "2026",
+      credentialId: "E8963B37961D36B32D76697D84B",
+      verifyLink: `${basePath}/certificates/namasteJavaScript.webp`,
+      category: "Programming",
     },
-    {
-      title: "MLOps: Machine Learning Operations",
-      issuer: "DeepLearning.AI / Coursera",
-      date: "2025",
-      credentialId: "COURSERA-MLOPS-XXX",
-      verifyLink: "https://coursera.org/verify",
-      category: "MLOps"
-    }
   ];
 
   return (
@@ -53,7 +39,8 @@ export default function Certificates() {
             Certifications & Licenses
           </h2>
           <p className="text-zinc-600 dark:text-zinc-400 mt-4">
-            A verified collection of professional cloud, DevOps, and machine learning credentials I have earned.
+            A verified collection of professional cloud, DevOps, and machine
+            learning credentials I have earned.
           </p>
         </div>
 
@@ -98,8 +85,18 @@ export default function Certificates() {
                   className="text-xs font-bold text-indigo-600 dark:text-indigo-400 hover:opacity-80 transition-opacity flex items-center gap-1 cursor-pointer"
                 >
                   Verify
-                  <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
+                  <svg
+                    className="w-3.5 h-3.5"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth={2.5}
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"
+                    />
                   </svg>
                 </a>
               </div>
