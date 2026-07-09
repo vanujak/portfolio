@@ -6,6 +6,9 @@
   --background: #ffffff;
   --background-secondary: #f4f4f5; /* Zinc 100 */
   --foreground: #09090b; /* Zinc 950 */
+  --scrollbar-track: #ffffff;
+  --scrollbar-thumb: #e4e4e7; /* Zinc 200 */
+  --scrollbar-thumb-hover: #a1a1aa; /* Zinc 400 */
 }
 
 @theme {
@@ -33,6 +36,9 @@
   --background: #000000; /* Pure black */
   --background-secondary: #0a0a0c; /* Deep pitch black secondary */
   --foreground: #fafafa; /* Zinc 50 */
+  --scrollbar-track: #000000;
+  --scrollbar-thumb: #27272a; /* Zinc 800 */
+  --scrollbar-thumb-hover: #6366f1; /* Indigo 500 */
 }
 
 html {
@@ -99,4 +105,23 @@ body {
 
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
   background: #6366f1; /* Indigo-500 thumb on hover */
+}
+
+/* Global Website Scrollbar styling */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--scrollbar-track);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb);
+  border-radius: 9999px;
+  border: 2.5px solid var(--scrollbar-track); /* Floating padded look */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--scrollbar-thumb-hover);
 }

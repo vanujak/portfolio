@@ -1,5 +1,6 @@
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
+import ScrollToTop from "@/components/ScrollToTop";
 import About from "@/components/About";
 import Projects from "@/components/Projects";
 import Certificates from "@/components/Certificates";
@@ -36,6 +37,9 @@ export default function Home() {
 
       {/* Footer */}
       <Footer />
+
+      {/* Floating Scroll to Top button */}
+      <ScrollToTop />
     </div>
   );
 }
