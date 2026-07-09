@@ -1,25 +1,44 @@
 export default function Projects() {
   const projects = [
     {
-      title: 'EasyCase',
-      description: 'A full-stack case management system featuring legal workflows and client data management. Fully containerized with Docker, automated via a Jenkins CI/CD pipeline, and provisioned with Terraform & Ansible.',
-      tags: ['MongoDB', 'Express', 'React', 'Node.js', 'Docker', 'Terraform', 'Ansible', 'Jenkins'],
-      link: '#',
-      github: 'https://github.com/vanujak',
+      title: "EasyCase",
+      description:
+        "A full-stack case management system featuring legal workflows and client data management. Fully containerized with Docker, automated via a Jenkins CI/CD pipeline, and provisioned with Terraform & Ansible.",
+      tags: [
+        "MongoDB",
+        "Express",
+        "React",
+        "Node.js",
+        "Docker",
+        "Terraform",
+        "Ansible",
+        "Jenkins",
+      ],
+      link: "https://easycase.site",
+      github: "https://github.com/vanujak/easycasecicd.git",
     },
     {
-      title: 'ScaleLab',
-      description: 'A distributed systems simulation platform for designing custom system topologies, executing traffic simulations, and rendering WebSocket-based real-time system monitoring metrics.',
-      tags: ['Next.js', 'TypeScript', 'Tailwind CSS', 'NestJS', 'WebSockets', 'JWT/OAuth'],
-      link: '#',
-      github: 'https://github.com/vanujak',
+      title: "ScaleLab",
+      description:
+        "A distributed systems simulation platform for designing custom system topologies, executing traffic simulations, and rendering WebSocket-based real-time system monitoring metrics.",
+      tags: [
+        "Next.js",
+        "TypeScript",
+        "Tailwind CSS",
+        "NestJS",
+        "WebSockets",
+        "JWT/OAuth",
+      ],
+      link: "#",
+      github: "https://github.com/vanujak",
     },
     {
-      title: 'SayIDo',
-      description: 'A mobile wedding directory application enabling vendors to manage profiles, bookings, and reservations. Features robust JWT/GraphQL authentication and a real-time chat interface.',
-      tags: ['React Native', 'Expo', 'TypeScript', 'GraphQL', 'WebSockets'],
-      link: '#',
-      github: 'https://github.com/vanujak',
+      title: "SayIDo",
+      description:
+        "A mobile wedding directory application enabling vendors to manage profiles, bookings, and reservations. Features robust JWT/GraphQL authentication and a real-time chat interface.",
+      tags: ["React Native", "Expo", "TypeScript", "GraphQL", "WebSockets"],
+      link: "#",
+      github: "https://github.com/vanujak",
     },
   ];
 
@@ -34,7 +53,8 @@ export default function Projects() {
             Featured Projects
           </h2>
           <p className="text-zinc-600 dark:text-zinc-400 mt-4">
-            A selection of my recent works. Each project represents different engineering challenges and how they were solved.
+            A selection of my recent works. Each project represents different
+            engineering challenges and how they were solved.
           </p>
         </div>
 
@@ -92,6 +112,8 @@ export default function Projects() {
               <div className="flex items-center justify-between border-t border-zinc-200/50 dark:border-zinc-800/50 pt-4 mt-auto">
                 <a
                   href={project.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="inline-flex items-center gap-1.5 text-sm font-semibold text-indigo-600 dark:text-indigo-400 hover:opacity-85 transition-opacity"
                 >
                   Live Demo
@@ -112,6 +134,8 @@ export default function Projects() {
                 </a>
                 <a
                   href={project.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="inline-flex items-center gap-1.5 text-sm font-semibold text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200 transition-colors"
                 >
                   GitHub
