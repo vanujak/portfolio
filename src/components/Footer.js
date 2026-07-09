@@ -29,10 +29,15 @@ export default function Footer() {
           </span>
         </div>
 
-        {/* Copyright */}
-        <p className="text-xs text-zinc-550 dark:text-zinc-500 text-center md:text-left">
-          &copy; {currentYear} Portfolio. All rights reserved. Built with Next.js and Tailwind CSS.
-        </p>
+        {/* Copyright & Last Updated */}
+        <div className="flex flex-col items-center md:items-start gap-1">
+          <p className="text-xs text-zinc-550 dark:text-zinc-500 text-center md:text-left">
+            &copy; {currentYear} Portfolio. All rights reserved. Built with Next.js and Tailwind CSS.
+          </p>
+          <p className="text-[10px] text-zinc-400 dark:text-zinc-650 font-medium">
+            Last updated: July 9, 2026
+          </p>
+        </div>
 
         {/* Privacy & Terms Toggles */}
         <div className="flex gap-6">
