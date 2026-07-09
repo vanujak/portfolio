@@ -1,4 +1,6 @@
 export default function Hero() {
+  const basePath = process.env.NODE_ENV === 'production' ? '/portfolio' : '';
+
   return (
     <section className="relative min-h-screen flex items-center justify-center pt-24 overflow-hidden bg-radial from-indigo-50/50 via-transparent to-transparent dark:from-indigo-950/20">
       {/* Background grid pattern */}
@@ -35,6 +37,25 @@ export default function Hero() {
             className="w-full sm:w-auto inline-flex items-center justify-center px-8 py-3.5 rounded-full text-base font-semibold text-white bg-indigo-600 hover:bg-indigo-500 shadow-md hover:shadow-indigo-500/20 transition-all duration-200"
           >
             Explore Projects
+          </a>
+          <a
+            href={`${basePath}/Vanuja_Karunaratne_CV.pdf`}
+            download="Vanuja_Karunaratne_CV.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-full text-base font-semibold text-indigo-600 dark:text-indigo-400 bg-indigo-50/50 dark:bg-indigo-950/20 border border-indigo-200/50 dark:border-indigo-900/50 hover:bg-indigo-100/50 dark:hover:bg-indigo-950/40 shadow-sm transition-all duration-200 cursor-pointer"
+          >
+            Download CV
+            <svg
+              className="w-4 h-4"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth={2}
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
+            </svg>
           </a>
           <a
             href="#contact"
