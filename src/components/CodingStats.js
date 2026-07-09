@@ -216,10 +216,7 @@ export default function CodingStats() {
               </div>
             </div>
 
-            <div className="mt-8 pt-4 border-t border-zinc-200/30 dark:border-zinc-800/30 flex items-center justify-between">
-              <span className="text-[11px] font-medium text-zinc-450 dark:text-zinc-550">
-                Fetched live from api.github.com
-              </span>
+            <div className="mt-8 pt-4 border-t border-zinc-200/30 dark:border-zinc-800/30 flex justify-end">
               <a
                 href="https://github.com/vanujak"
                 target="_blank"
@@ -337,10 +334,7 @@ export default function CodingStats() {
               </div>
             </div>
 
-            <div className="mt-8 pt-4 border-t border-zinc-200/30 dark:border-zinc-800/30 flex items-center justify-between">
-              <span className="text-[11px] font-medium text-zinc-455 dark:text-zinc-550">
-                Data synced via public API
-              </span>
+            <div className="mt-8 pt-4 border-t border-zinc-200/30 dark:border-zinc-800/30 flex justify-end">
               <a
                 href="https://leetcode.com/u/vanujak/"
                 target="_blank"
