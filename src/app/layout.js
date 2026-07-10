@@ -39,7 +39,7 @@ export const metadata = {
   },
   openGraph: {
     title: "Vanuja Karunaratne | Portfolio",
-    description: "DevOps Intern at SLT-MOBITEL PLC | Computer Engineering Student at University of Ruhuna. Passionate about automating systems operations and building scalable developer infrastructure.",
+    description: "DevOps Intern at SLT-MOBITEL PLC & Computer Engineering student. Automation, cloud systems, and infrastructure builder.",
     url: "https://vanujak.github.io/portfolio",
     siteName: "Vanuja Karunaratne Portfolio",
     images: [
@@ -56,7 +56,7 @@ export const metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Vanuja Karunaratne | Portfolio",
-    description: "DevOps Intern at SLT-MOBITEL PLC | Computer Engineering Student at University of Ruhuna. Passionate about automating systems operations and building scalable developer infrastructure.",
+    description: "DevOps Intern at SLT-MOBITEL PLC & Computer Engineering student. Automation, cloud systems, and infrastructure builder.",
     images: ["https://vanujak.github.io/portfolio/og-image.png"],
   },
 };
