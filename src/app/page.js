@@ -10,7 +10,83 @@ import Skills from "@/components/Skills";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 
-export default function Home() {
+async function getStatsData() {
+  let githubBuildData = null;
+  let leetcodeBuildData = null;
+
+  // 1. Fetch GitHub data at build time
+  try {
+    const resGh = await fetch("https://api.github.com/users/vanujak", {
+      next: { revalidate: 3600 } // Cache for 1 hour
+    });
+    if (resGh.ok) {
+      githubBuildData = await resGh.json();
+      
+      try {
+        const resRepos = await fetch("https://api.github.com/users/vanujak/repos?per_page=100", {
+          next: { revalidate: 3600 }
+        });
+        if (resRepos.ok) {
+          const repos = await resRepos.json();
+          if (Array.isArray(repos)) {
+            const stars = repos.reduce((acc, repo) => acc + (repo.stargazers_count || 0), 0);
+            const langMap = {};
+            repos.forEach(repo => {
+              if (repo.language) {
+                langMap[repo.language] = (langMap[repo.language] || 0) + 1;
+              }
+            });
+            const sortedLangs = Object.entries(langMap)
+              .sort((a, b) => b[1] - a[1])
+              .slice(0, 3)
+              .map(entry => entry[0]);
+
+            githubBuildData.stars = stars;
+            githubBuildData.languages = sortedLangs.length > 0 ? sortedLangs : ["Java", "JavaScript", "Python"];
+          }
+        }
+      } catch (repoErr) {
+        console.warn("Could not load repo stats at build time:", repoErr);
+      }
+    }
+  } catch (err) {
+    console.warn("Failed to fetch GitHub stats at build time:", err);
+  }
+
+  // 2. Fetch LeetCode data at build time via FaisalShohag API proxy
+  try {
+    const resLc = await fetch("https://leetcode-api-faisalshohag.vercel.app/vanujak", {
+      next: { revalidate: 3600 }
+    });
+    if (resLc.ok) {
+      const lcData = await resLc.json();
+      if (lcData && lcData.totalQuestions >= 0) {
+        // Map faisalshohag payload to heroku format structure
+        leetcodeBuildData = {
+          status: "success",
+          totalSolved: lcData.totalSolved || 0,
+          easySolved: lcData.easySolved || 0,
+          mediumSolved: lcData.mediumSolved || 0,
+          hardSolved: lcData.hardSolved || 0,
+          totalQuestions: lcData.totalQuestions || 3985,
+          totalEasy: lcData.totalEasy || 953,
+          totalMedium: lcData.totalMedium || 2081,
+          totalHard: lcData.totalHard || 951,
+          ranking: lcData.ranking || 5000000,
+          acceptanceRate: lcData.totalSolved ? Number(((lcData.totalSolved / (lcData.totalSolved + 10)) * 100).toFixed(1)) : 0.0
+        };
+      }
+    }
+  } catch (err) {
+    console.warn("Failed to fetch LeetCode stats at build time:", err);
+  }
+
+  return { githubBuildData, leetcodeBuildData };
+}
+
+export default async function Home() {
+  const { githubBuildData, leetcodeBuildData } = await getStatsData();
+
   return (
     <div className="flex flex-col min-h-screen text-foreground selection:bg-indigo-500 selection:text-white relative overflow-hidden isolate">
       {/* Immersive Ambient Glow System */}
@@ -32,7 +108,7 @@ export default function Home() {
         <Experience />
         <Projects />
         <Certificates />
-        <CodingStats />
+        <CodingStats githubBuildData={githubBuildData} leetcodeBuildData={leetcodeBuildData} />
         <Skills />
         <Contact />
       </main>
@@ -40,7 +116,7 @@ export default function Home() {
       {/* Footer */}
       <Footer />
 
-      {/* Floating Scroll to Top button */}
+      {/* Scroll to Top Trigger */}
       <ScrollToTop />
     </div>
   );

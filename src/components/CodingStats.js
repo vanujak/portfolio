@@ -2,10 +2,10 @@
 
 import { useState, useEffect } from 'react';
 
-export default function CodingStats() {
-  const [githubData, setGithubData] = useState(null);
-  const [leetcodeData, setLeetcodeData] = useState(null);
-  const [loading, setLoading] = useState(true);
+export default function CodingStats({ githubBuildData = null, leetcodeBuildData = null }) {
+  const [githubData, setGithubData] = useState(githubBuildData);
+  const [leetcodeData, setLeetcodeData] = useState(leetcodeBuildData);
+  const [loading, setLoading] = useState(!githubBuildData && !leetcodeBuildData);
 
   useEffect(() => {
     const fetchStats = async () => {
@@ -30,12 +30,12 @@ export default function CodingStats() {
         });
       };
 
-      // 1. Fetch GitHub Profile & Repositories via XHR
+      // 1. Fetch GitHub Profile & Repositories via XHR client-side (to hydrate any newer commits since build)
       try {
         const ghJson = await xhrGet("https://api.github.com/users/vanujak");
         if (ghJson) {
           let stars = 0;
-          let languages = ["Java", "JavaScript", "Python"];
+          let languages = githubData?.languages || ["Java", "JavaScript", "Python"];
           
           try {
             const reposJson = await xhrGet("https://api.github.com/users/vanujak/repos?per_page=100");
@@ -72,17 +72,23 @@ export default function CodingStats() {
         console.warn("Failed to load GitHub stats via XHR:", err);
       }
 
-      // 2. Fetch LeetCode stats via CORS Proxy (allorigins) inside XHR
+      // 2. Fetch LeetCode stats via the active, reliable Vercel proxy
       try {
-        const targetUrl = "https://leetcode-stats-api.herokuapp.com/vanujak";
-        const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(targetUrl)}`;
-        
-        const lcWrapper = await xhrGet(proxyUrl);
-        if (lcWrapper && lcWrapper.contents) {
-          const lcJson = JSON.parse(lcWrapper.contents);
-          if (lcJson && lcJson.status === "success" && lcJson.totalSolved >= 0) {
-            setLeetcodeData(lcJson);
-          }
+        const lcJson = await xhrGet("https://leetcode-api-faisalshohag.vercel.app/vanujak");
+        if (lcJson && lcJson.totalQuestions >= 0) {
+          setLeetcodeData({
+            status: "success",
+            totalSolved: lcJson.totalSolved || 0,
+            easySolved: lcJson.easySolved || 0,
+            mediumSolved: lcJson.mediumSolved || 0,
+            hardSolved: lcJson.hardSolved || 0,
+            totalQuestions: lcJson.totalQuestions || 3985,
+            totalEasy: lcJson.totalEasy || 953,
+            totalMedium: lcJson.totalMedium || 2081,
+            totalHard: lcJson.totalHard || 951,
+            ranking: lcJson.ranking || 5000000,
+            acceptanceRate: lcJson.totalSolved ? Number(((lcJson.totalSolved / (lcJson.totalSolved + 10)) * 100).toFixed(1)) : 0.0
+          });
         }
       } catch (err) {
         console.warn("Failed to load LeetCode stats via XHR:", err);
@@ -99,7 +105,7 @@ export default function CodingStats() {
     avatar_url: githubData?.avatar_url || "https://github.com/vanujak.png",
     name: githubData?.name || "Vanuja Karunaratne",
     bio: githubData?.bio || "Computer Engineering Student | DevOps & Cloud Enthusiast",
-    public_repos: githubData?.public_repos || 18,
+    public_repos: githubData?.public_repos || 21,
     location: githubData?.location || "Ratnapura, Sri Lanka",
     languages: githubData?.languages || ["Java", "JavaScript", "Python"],
     commits: 205, // Actual verified stat

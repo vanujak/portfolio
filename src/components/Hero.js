@@ -36,7 +36,7 @@ export default function Hero() {
     } else if (cleanCmd === "projects") {
       reply = "1. EasyCase - Case Management Portal (MERN, Docker, Jenkins)\n2. ScaleLab - Distributed simulator (Next.js, NestJS, WebSockets)\n3. SayIDo   - Mobile Directory (React Native, GraphQL)";
     } else if (cleanCmd === "contact") {
-      reply = "Email:    vanujakofficial@gmail.com\nTelegram: t.me/vanujak (@vanujak)";
+      reply = "Email:    vanujakofficial@gmail.com\nTelegram: t.me/vanujak (@vanujak)\nDiscord:  vanujak";
     } else if (cleanCmd === "secret") {
       reply = "⚖️ Law & Code: Did you know? Vanuja is also studying Law! He is on hold at Sri Lanka Law College, balancing software architectures with legal frameworks.";
     } else if (cleanCmd === "clear") {
