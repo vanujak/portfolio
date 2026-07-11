@@ -13,6 +13,8 @@ export default function Hero() {
     { text: "System connection established: secure SSH shell.", type: "info" },
     { text: "Type 'help' to see all available commands.", type: "info" }
   ]);
+  const [commandHistory, setCommandHistory] = useState([]);
+  const [historyIndex, setHistoryIndex] = useState(-1);
 
   // Auto-scroll ONLY the terminal log container (prevents hijacking/disabling main page scroll)
   useEffect(() => {
@@ -28,7 +30,7 @@ export default function Hero() {
     if (cleanCmd === "help") {
       reply = "Available commands:\n  [about]    - Brief introduction\n  [skills]   - Technical stack\n  [projects] - Recent software projects\n  [contact]  - Secure contact details\n  [clear]    - Clear output screen\n  [secret]   - Fun trivia!";
     } else if (cleanCmd === "about") {
-      reply = "Vanuja Karunaratne\nComputer Engineering student at University of Ruhuna, Galle.\nPassionate about cloud orchestration, infrastructure automation, CI/CD, and MLOps pipelines.";
+      reply = "Vanuja Karunaratne\nComputer Engineering undergraduate at University of Ruhuna, Galle.\nPassionate about cloud orchestration, infrastructure automation, CI/CD, and MLOps pipelines.";
     } else if (cleanCmd === "skills") {
       reply = "DevOps/IaC:  Docker, Jenkins, Terraform, Ansible, AWS, MLOps\nBackend:     Node.js, ExpressJS, NestJS, MongoDB, PostgreSQL, MySQL\nLanguages:   Java, C++, Python, JavaScript, Tailwind CSS";
     } else if (cleanCmd === "projects") {
@@ -40,6 +42,7 @@ export default function Hero() {
     } else if (cleanCmd === "clear") {
       setHistory([]);
       setInput("");
+      setHistoryIndex(-1);
       return;
     } else if (cleanCmd === "") {
       reply = "";
@@ -52,7 +55,36 @@ export default function Hero() {
       { text: `vanuja@devops-node:~$ ${cmd}`, type: "command" },
       ...(reply ? [{ text: reply, type: "output" }] : [])
     ]);
+
+    if (cmd.trim()) {
+      setCommandHistory((prev) => [...prev, cmd]);
+    }
+    setHistoryIndex(-1);
     setInput("");
+  };
+
+  const handleKeyDown = (e) => {
+    if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      if (commandHistory.length === 0) return;
+      
+      const nextIndex = historyIndex === -1 ? commandHistory.length - 1 : Math.max(0, historyIndex - 1);
+      setHistoryIndex(nextIndex);
+      setInput(commandHistory[nextIndex]);
+    } else if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      if (commandHistory.length === 0) return;
+      if (historyIndex === -1) return;
+
+      const nextIndex = historyIndex + 1;
+      if (nextIndex >= commandHistory.length) {
+        setHistoryIndex(-1);
+        setInput("");
+      } else {
+        setHistoryIndex(nextIndex);
+        setInput(commandHistory[nextIndex]);
+      }
+    }
   };
 
   const focusInput = () => {
@@ -177,6 +209,7 @@ export default function Hero() {
                   type="text"
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
+                  onKeyDown={handleKeyDown}
                   className="flex-grow bg-transparent text-zinc-50 focus:outline-none border-none caret-indigo-500 selection:bg-indigo-500/30"
                   autoFocus
                   autoComplete="off"
