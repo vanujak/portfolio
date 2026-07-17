@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import nodemailer from "nodemailer";
 
-function getAutoReplyTemplate(name, visitorMessage) {
+function getAutoReplyTemplate(name, visitorMessage, subject) {
   const currentYear = new Date().getFullYear();
   return `
     <!DOCTYPE html>
@@ -26,11 +26,11 @@ function getAutoReplyTemplate(name, visitorMessage) {
                 <!-- Content Area -->
                 <tr>
                   <td style="padding: 40px 30px;">
-                    <!-- Brand/Header -->
+                    <!-- Brand/Header (Displays Email Subject) -->
                     <table border="0" cellpadding="0" cellspacing="0" width="100%" style="margin-bottom: 30px;">
                       <tr>
                         <td>
-                          <span style="font-size: 20px; font-weight: 800; letter-spacing: -0.5px; color: #1e1b4b;">Vanuja<span style="color: #6366f1;">.</span></span>
+                          <span style="font-size: 18px; font-weight: 700; color: #1e1b4b;">${subject}</span>
                         </td>
                       </tr>
                     </table>
@@ -59,14 +59,14 @@ function getAutoReplyTemplate(name, visitorMessage) {
 
                     <!-- Signature -->
                     <p style="font-size: 15px; line-height: 1.6; color: #475569; margin: 0 0 4px 0;">Best regards,</p>
-                    <p style="font-size: 15px; font-weight: 700; color: #1e1b4b; margin: 0;">Vanuja</p>
+                    <p style="font-size: 15px; font-weight: 700; color: #1e1b4b; margin: 0;">Vanuja Karunaratne</p>
                   </td>
                 </tr>
 
                 <!-- Footer Section -->
                 <tr>
                   <td style="background-color: #f8fafc; border-top: 1px solid #f1f5f9; padding: 30px; text-align: center;">
-                    <!-- Social Links -->
+                    <!-- Social Links (X renamed, Instagram removed) -->
                     <p style="margin: 0 0 12px 0; font-size: 13px; font-weight: 600; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.5px;">Let's connect</p>
                     <table align="center" border="0" cellpadding="0" cellspacing="0" style="margin: 0 auto 20px auto;">
                       <tr>
@@ -79,18 +79,14 @@ function getAutoReplyTemplate(name, visitorMessage) {
                         </td>
                         <td style="padding: 0 4px; color: #cbd5e1;">&bull;</td>
                         <td style="padding: 0 8px;">
-                          <a href="https://twitter.com/vanuja__" style="font-size: 13px; color: #6366f1; text-decoration: none; font-weight: 600;">Twitter</a>
-                        </td>
-                        <td style="padding: 0 4px; color: #cbd5e1;">&bull;</td>
-                        <td style="padding: 0 8px;">
-                          <a href="https://instagram.com/vanuja___" style="font-size: 13px; color: #6366f1; text-decoration: none; font-weight: 600;">Instagram</a>
+                          <a href="https://twitter.com/vanuja__" style="font-size: 13px; color: #6366f1; text-decoration: none; font-weight: 600;">X</a>
                         </td>
                       </tr>
                     </table>
 
                     <!-- Copyright / Note -->
                     <p style="font-size: 12px; color: #94a3b8; margin: 0; line-height: 1.5;">
-                      &copy; ${currentYear} Vanuja. All rights reserved.<br>
+                      &copy; ${currentYear} Vanuja Karunaratne. All rights reserved.<br>
                       Sent automatically via portfolio contact form.
                     </p>
                   </td>
@@ -173,12 +169,13 @@ export async function POST(request) {
     });
 
     // 2. Send auto-reply to the visitor
+    const visitorSubject = "Thank you for reaching out!";
     const visitorMailPromise = transporter.sendMail({
-      from: `"Vanuja" <${gmailUser}>`,
+      from: `"Vanuja Karunaratne" <${gmailUser}>`,
       to: email,
-      subject: "Thank you for reaching out!",
-      text: `Hi ${name},\n\nThanks for reaching out! I've received your message and will get back to you soon.\n\nBest regards,\nVanuja`,
-      html: getAutoReplyTemplate(name, message),
+      subject: visitorSubject,
+      text: `Hi ${name},\n\nThanks for reaching out! I've received your message and will get back to you soon.\n\nBest regards,\nVanuja Karunaratne`,
+      html: getAutoReplyTemplate(name, message, visitorSubject),
     });
 
     // Send both concurrently
