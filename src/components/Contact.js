@@ -18,75 +18,29 @@ export default function Contact() {
   });
   const [status, setStatus] = useState(null);
 
-  const FORMSPREE_ID =
-    process.env.NEXT_PUBLIC_FORMSPREE_ID || "YOUR_FORMSPREE_ID";
-  const EMAILJS_SERVICE_ID =
-    process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || "YOUR_SERVICE_ID";
-  const EMAILJS_PUBLIC_KEY =
-    process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || "YOUR_PUBLIC_KEY";
-  const EMAILJS_VISITOR_TEMPLATE =
-    process.env.NEXT_PUBLIC_EMAILJS_VISITOR_TEMPLATE ||
-    "YOUR_VISITOR_TEMPLATE_ID";
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     setStatus("sending");
 
     try {
-      // 1. Send notification to yourself via Formspree
-      const resNotification = await fetch(
-        `https://formspree.io/f/${FORMSPREE_ID}`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-          },
-          body: JSON.stringify(formState),
+      const apiEndpoint = process.env.NEXT_PUBLIC_API_URL || "/api/contact";
+      const res = await fetch(apiEndpoint, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
         },
-      );
+        body: JSON.stringify(formState),
+      });
 
-      // 2. Send automatic confirmation (auto-reply) to the visitor via EmailJS
-      const resAutoReply = await fetch(
-        "https://api.emailjs.com/api/v1.0/email/send",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            service_id: EMAILJS_SERVICE_ID,
-            template_id: EMAILJS_VISITOR_TEMPLATE,
-            user_id: EMAILJS_PUBLIC_KEY,
-            template_params: {
-              name: formState.name,
-              email: formState.email,
-              title: "Contact Form Inquiry",
-            },
-          }),
-        },
-      );
-
-      if (resNotification.ok && resAutoReply.ok) {
+      if (res.ok) {
         setStatus("success");
         setFormState({ name: "", email: "", message: "" });
       } else {
-        if (!resNotification.ok) {
-          const errText = await resNotification.text();
-          console.error(
-            "Formspree notification failed:",
-            resNotification.status,
-            errText,
-          );
-        }
-        if (!resAutoReply.ok) {
-          const errText = await resAutoReply.text();
-          console.error(
-            "EmailJS auto-reply failed:",
-            resAutoReply.status,
-            errText,
-          );
-        }
+        const errData = await res.json().catch(() => ({}));
+        console.error(
+          "Form submission failed:",
+          errData.error || res.statusText,
+        );
         setStatus("error");
       }
     } catch (error) {

@@ -1,7 +1,9 @@
 /** @type {import('next').NextConfig} */
+const isStatic = process.env.IS_STATIC_EXPORT === 'true';
+
 const nextConfig = {
-  output: 'export',
-  basePath: process.env.NODE_ENV === 'production' ? '/portfolio' : '',
+  ...(isStatic ? { output: 'export' } : {}),
+  basePath: isStatic ? '/portfolio' : '',
   images: {
     unoptimized: true,
   },
