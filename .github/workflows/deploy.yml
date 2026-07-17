@@ -55,6 +55,7 @@ jobs:
         run: ${{ steps.detect-package-manager.outputs.runner }} next build
         env:
           IS_STATIC_EXPORT: true
+          NEXT_PUBLIC_IS_STATIC_EXPORT: true
           NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_URL }}
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

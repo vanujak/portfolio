@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 
 export default function Hero() {
-  const basePath = process.env.NODE_ENV === 'production' ? '/portfolio' : '';
+  const basePath = process.env.NEXT_PUBLIC_IS_STATIC_EXPORT === 'true' ? '/portfolio' : '';
   const inputRef = useRef(null);
   const logsRef = useRef(null);
 

@@ -5,7 +5,7 @@ import Image from "next/image";
 
 export default function About() {
   const [activeModal, setActiveModal] = useState(null);
-  const basePath = process.env.NODE_ENV === 'production' ? '/portfolio' : '';
+  const basePath = process.env.NEXT_PUBLIC_IS_STATIC_EXPORT === 'true' ? '/portfolio' : '';
 
   useEffect(() => {
     if (activeModal) {

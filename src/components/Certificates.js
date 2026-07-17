@@ -1,5 +1,5 @@
 export default function Certificates() {
-  const basePath = process.env.NODE_ENV === "production" ? "/portfolio" : "";
+  const basePath = process.env.NEXT_PUBLIC_IS_STATIC_EXPORT === 'true' ? '/portfolio' : '';
   const certificates = [
     {
       title: "Low Level System Design, Design Patterns & SOLID Principles",
