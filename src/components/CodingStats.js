@@ -1,19 +1,30 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 
-export default function CodingStats({ githubBuildData = null, leetcodeBuildData = null }) {
+export default function CodingStats({
+  githubBuildData = null,
+  leetcodeBuildData = null,
+}) {
   const [githubData, setGithubData] = useState(githubBuildData);
+  const [githubActivity, setGithubActivity] = useState(null);
   const [leetcodeData, setLeetcodeData] = useState(leetcodeBuildData);
-  const [loading, setLoading] = useState(!githubBuildData && !leetcodeBuildData);
 
   useEffect(() => {
     const fetchStats = async () => {
+      const githubHeaders = {
+        Accept: "application/vnd.github+json",
+        "X-GitHub-Api-Version": "2022-11-28",
+      };
+
       // Native XHR GET utility to bypass Next.js dev server fetch override (prevents red screen error overlays)
-      const xhrGet = (url) => {
+      const xhrGet = (url, headers = {}) => {
         return new Promise((resolve, reject) => {
           const xhr = new XMLHttpRequest();
-          xhr.open("GET", url);
+          xhr.open("GET", url, true);
+          Object.entries(headers).forEach(([key, value]) => {
+            xhr.setRequestHeader(key, value);
+          });
           xhr.onload = () => {
             if (xhr.status >= 200 && xhr.status < 300) {
               try {
@@ -35,46 +46,103 @@ export default function CodingStats({ githubBuildData = null, leetcodeBuildData 
         const ghJson = await xhrGet("https://api.github.com/users/vanujak");
         if (ghJson) {
           let stars = 0;
-          let languages = githubData?.languages || ["Java", "JavaScript", "Python"];
-          
+          let languages = githubData?.languages || [
+            "Java",
+            "JavaScript",
+            "Python",
+          ];
+
           try {
-            const reposJson = await xhrGet("https://api.github.com/users/vanujak/repos?per_page=100");
+            const reposJson = await xhrGet(
+              "https://api.github.com/users/vanujak/repos?per_page=100",
+            );
             if (reposJson && Array.isArray(reposJson)) {
-              stars = reposJson.reduce((acc, repo) => acc + (repo.stargazers_count || 0), 0);
-              
+              stars = reposJson.reduce(
+                (acc, repo) => acc + (repo.stargazers_count || 0),
+                0,
+              );
+
               const langMap = {};
-              reposJson.forEach(repo => {
+              reposJson.forEach((repo) => {
                 if (repo.language) {
                   langMap[repo.language] = (langMap[repo.language] || 0) + 1;
                 }
               });
-              
+
               const sortedLangs = Object.entries(langMap)
                 .sort((a, b) => b[1] - a[1])
                 .slice(0, 3)
-                .map(entry => entry[0]);
-                
+                .map((entry) => entry[0]);
+
               if (sortedLangs.length > 0) {
                 languages = sortedLangs;
               }
             }
           } catch (repoErr) {
-            console.warn("Could not load repo stats, using user profile fallbacks", repoErr);
+            console.warn(
+              "Could not load repo stats, using user profile fallbacks",
+              repoErr,
+            );
           }
-          
+
           setGithubData({
             ...ghJson,
             stars,
-            languages
+            languages,
           });
         }
       } catch (err) {
         console.warn("Failed to load GitHub stats via XHR:", err);
       }
 
+      try {
+        const activityJson = await xhrGet(
+          "https://github-contributions-api.jogruber.de/v4/vanujak",
+        );
+        if (activityJson && Array.isArray(activityJson.contributions)) {
+          const sortedDays = [...activityJson.contributions].sort(
+            (a, b) => new Date(a.date) - new Date(b.date),
+          );
+
+          let totalContributions = 0;
+          let longestStreak = 0;
+          let currentRun = 0;
+
+          sortedDays.forEach((day) => {
+            const count = day.count || 0;
+            totalContributions += count;
+            if (count > 0) {
+              currentRun += 1;
+              longestStreak = Math.max(longestStreak, currentRun);
+            } else {
+              currentRun = 0;
+            }
+          });
+
+          let currentStreak = 0;
+          for (let i = sortedDays.length - 1; i >= 0; i -= 1) {
+            if ((sortedDays[i].count || 0) > 0) {
+              currentStreak += 1;
+            } else {
+              break;
+            }
+          }
+
+          setGithubActivity({
+            totalContributions,
+            currentStreak,
+            longestStreak,
+          });
+        }
+      } catch (err) {
+        console.warn("Failed to load GitHub activity via XHR:", err);
+      }
+
       // 2. Fetch LeetCode stats via the active, reliable Vercel proxy
       try {
-        const lcJson = await xhrGet("https://leetcode-api-faisalshohag.vercel.app/vanujak");
+        const lcJson = await xhrGet(
+          "https://leetcode-api-faisalshohag.vercel.app/vanujak",
+        );
         if (lcJson && lcJson.totalQuestions >= 0) {
           setLeetcodeData({
             status: "success",
@@ -87,13 +155,18 @@ export default function CodingStats({ githubBuildData = null, leetcodeBuildData 
             totalMedium: lcJson.totalMedium || 2081,
             totalHard: lcJson.totalHard || 951,
             ranking: lcJson.ranking || 5000000,
-            acceptanceRate: lcJson.totalSolved ? Number(((lcJson.totalSolved / (lcJson.totalSolved + 10)) * 100).toFixed(1)) : 0.0
+            acceptanceRate: lcJson.totalSolved
+              ? Number(
+                  (
+                    (lcJson.totalSolved / (lcJson.totalSolved + 10)) *
+                    100
+                  ).toFixed(1),
+                )
+              : 0.0,
           });
         }
       } catch (err) {
         console.warn("Failed to load LeetCode stats via XHR:", err);
-      } finally {
-        setLoading(false);
       }
     };
 
@@ -104,13 +177,15 @@ export default function CodingStats({ githubBuildData = null, leetcodeBuildData 
   const ghStats = {
     avatar_url: githubData?.avatar_url || "https://github.com/vanujak.png",
     name: githubData?.name || "Vanuja Karunaratne",
-    bio: githubData?.bio || "Computer Engineering Student | DevOps & Cloud Enthusiast",
+    bio:
+      githubData?.bio ||
+      "Computer Engineering Student | DevOps & Cloud Enthusiast",
     public_repos: githubData?.public_repos || 21,
     location: githubData?.location || "Ratnapura, Sri Lanka",
     languages: githubData?.languages || ["Java", "JavaScript", "Python"],
-    commits: 205, // Actual verified stat
-    prs: 13,      // Actual verified stat
-    contributedTo: 21 // Actual verified stat
+    totalContributions: githubActivity?.totalContributions || 0,
+    currentStreak: githubActivity?.currentStreak || 0,
+    longestStreak: githubActivity?.longestStreak || 0,
   };
 
   const lcStats = leetcodeData || {
@@ -124,7 +199,7 @@ export default function CodingStats({ githubBuildData = null, leetcodeBuildData 
     totalMedium: 2081,
     totalHard: 951,
     ranking: 5000000,
-    acceptanceRate: 0.0
+    acceptanceRate: 0.0,
   };
 
   return (
@@ -139,13 +214,13 @@ export default function CodingStats({ githubBuildData = null, leetcodeBuildData 
             Coding Activity & Stats
           </h2>
           <p className="text-zinc-600 dark:text-zinc-400 mt-4">
-            Live developer metrics fetched dynamically from my public GitHub and LeetCode profiles.
+            Live developer metrics fetched dynamically from my public GitHub and
+            LeetCode profiles.
           </p>
         </div>
 
         {/* Dashboard Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
-          
           {/* NATIVE GITHUB CARD */}
           <div className="flex flex-col bg-background-secondary/35 border border-zinc-200/40 dark:border-zinc-800/30 rounded-3xl p-6 sm:p-8 hover:scale-[1.01] hover:border-indigo-500/50 dark:hover:border-indigo-400/50 transition-all duration-300 shadow-xs justify-between">
             <div>
@@ -180,37 +255,39 @@ export default function CodingStats({ githubBuildData = null, leetcodeBuildData 
                 </div>
               </div>
 
-              {/* Dynamic Stats Numbers (Verified metrics requested by user) */}
+              {/* Dynamic Stats Numbers */}
               <div className="grid grid-cols-3 gap-4 bg-background/50 dark:bg-zinc-900/30 border border-zinc-200/30 dark:border-zinc-800/20 p-4 rounded-2xl">
                 <div className="text-center">
                   <div className="text-xl sm:text-2xl font-black text-indigo-600 dark:text-indigo-400">
-                    {ghStats.commits}
+                    {ghStats.totalContributions.toLocaleString()}
                   </div>
                   <div className="text-[10px] sm:text-xs font-semibold text-zinc-400 dark:text-zinc-500 uppercase mt-0.5">
-                    Total Commits
+                    Total Contributions
                   </div>
                 </div>
                 <div className="text-center border-x border-zinc-200/30 dark:border-zinc-800/30">
                   <div className="text-xl sm:text-2xl font-black text-indigo-600 dark:text-indigo-400">
-                    {ghStats.prs}
+                    {ghStats.currentStreak}
                   </div>
                   <div className="text-[10px] sm:text-xs font-semibold text-zinc-400 dark:text-zinc-500 uppercase mt-0.5">
-                    Total PRs
+                    Current Streak
                   </div>
                 </div>
                 <div className="text-center">
                   <div className="text-xl sm:text-2xl font-black text-indigo-600 dark:text-indigo-400">
-                    {ghStats.contributedTo}
+                    {ghStats.longestStreak}
                   </div>
                   <div className="text-[10px] sm:text-xs font-semibold text-zinc-400 dark:text-zinc-500 uppercase mt-0.5">
-                    Contributed To
+                    Longest Streak
                   </div>
                 </div>
               </div>
 
               {/* Primary Languages distribution tag pills */}
               <div className="flex flex-wrap gap-2 mt-5 items-center justify-center sm:justify-start">
-                <span className="text-xs font-bold text-zinc-550 dark:text-zinc-450 mr-1">Primary Languages:</span>
+                <span className="text-xs font-bold text-zinc-550 dark:text-zinc-450 mr-1">
+                  Primary Languages:
+                </span>
                 {ghStats.languages.map((lang, i) => (
                   <span
                     key={i}
@@ -230,8 +307,18 @@ export default function CodingStats({ githubBuildData = null, leetcodeBuildData 
                 className="text-xs font-bold text-indigo-600 dark:text-indigo-400 hover:opacity-80 transition-opacity flex items-center gap-1 cursor-pointer"
               >
                 View GitHub
-                <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
+                <svg
+                  className="w-3.5 h-3.5"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth={2.5}
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"
+                  />
                 </svg>
               </a>
             </div>
@@ -270,27 +357,35 @@ export default function CodingStats({ githubBuildData = null, leetcodeBuildData 
                   {/* Easy */}
                   <div>
                     <div className="flex justify-between text-xs font-bold text-zinc-500 dark:text-zinc-400 mb-1">
-                      <span className="text-emerald-600 dark:text-emerald-400">Easy</span>
+                      <span className="text-emerald-600 dark:text-emerald-400">
+                        Easy
+                      </span>
                       <span>{lcStats.easySolved}</span>
                     </div>
                     <div className="w-full h-2.5 bg-zinc-200/50 dark:bg-zinc-800/50 rounded-full overflow-hidden">
                       <div
                         className="h-full bg-emerald-500 rounded-full"
-                        style={{ width: `${(lcStats.easySolved / (lcStats.totalEasy || 800)) * 100}%` }}
+                        style={{
+                          width: `${(lcStats.easySolved / (lcStats.totalEasy || 800)) * 100}%`,
+                        }}
                       />
                     </div>
                   </div>
-                  
+
                   {/* Medium */}
                   <div>
                     <div className="flex justify-between text-xs font-bold text-zinc-500 dark:text-zinc-400 mb-1">
-                      <span className="text-amber-500 dark:text-amber-400">Medium</span>
+                      <span className="text-amber-500 dark:text-amber-400">
+                        Medium
+                      </span>
                       <span>{lcStats.mediumSolved}</span>
                     </div>
                     <div className="w-full h-2.5 bg-zinc-200/50 dark:bg-zinc-800/50 rounded-full overflow-hidden">
                       <div
                         className="h-full bg-amber-500 rounded-full"
-                        style={{ width: `${(lcStats.mediumSolved / (lcStats.totalMedium || 1600)) * 100}%` }}
+                        style={{
+                          width: `${(lcStats.mediumSolved / (lcStats.totalMedium || 1600)) * 100}%`,
+                        }}
                       />
                     </div>
                   </div>
@@ -298,13 +393,17 @@ export default function CodingStats({ githubBuildData = null, leetcodeBuildData 
                   {/* Hard */}
                   <div>
                     <div className="flex justify-between text-xs font-bold text-zinc-555 dark:text-zinc-400 mb-1">
-                      <span className="text-rose-500 dark:text-rose-455">Hard</span>
+                      <span className="text-rose-500 dark:text-rose-455">
+                        Hard
+                      </span>
                       <span>{lcStats.hardSolved}</span>
                     </div>
                     <div className="w-full h-2.5 bg-zinc-200/50 dark:bg-zinc-800/50 rounded-full overflow-hidden">
                       <div
                         className="h-full bg-rose-500 rounded-full"
-                        style={{ width: `${(lcStats.hardSolved / (lcStats.totalHard || 700)) * 100}%` }}
+                        style={{
+                          width: `${(lcStats.hardSolved / (lcStats.totalHard || 700)) * 100}%`,
+                        }}
                       />
                     </div>
                   </div>
@@ -323,7 +422,9 @@ export default function CodingStats({ githubBuildData = null, leetcodeBuildData 
                 </div>
                 <div className="text-center border-x border-zinc-200/30 dark:border-zinc-800/30 flex flex-col justify-center">
                   <div className="text-xs sm:text-sm font-bold text-indigo-600 dark:text-indigo-400 truncate px-1">
-                    {lcStats.ranking ? lcStats.ranking.toLocaleString() : "1,482,091"}
+                    {lcStats.ranking
+                      ? lcStats.ranking.toLocaleString()
+                      : "1,482,091"}
                   </div>
                   <div className="text-[10px] sm:text-xs font-semibold text-zinc-400 dark:text-zinc-500 uppercase mt-1">
                     Global Rank
@@ -348,13 +449,22 @@ export default function CodingStats({ githubBuildData = null, leetcodeBuildData 
                 className="text-xs font-bold text-indigo-600 dark:text-indigo-400 hover:opacity-80 transition-opacity flex items-center gap-1 cursor-pointer"
               >
                 View LeetCode
-                <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
+                <svg
+                  className="w-3.5 h-3.5"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth={2.5}
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"
+                  />
                 </svg>
               </a>
             </div>
           </div>
-
         </div>
       </div>
     </section>

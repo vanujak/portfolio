@@ -14,24 +14,38 @@ async function getStatsData() {
   let githubBuildData = null;
   let leetcodeBuildData = null;
 
+  const githubHeaders = {
+    Accept: "application/vnd.github+json",
+    "X-GitHub-Api-Version": "2022-11-28",
+    "User-Agent": "portfolio-app",
+  };
+
   // 1. Fetch GitHub data at build time
   try {
     const resGh = await fetch("https://api.github.com/users/vanujak", {
-      next: { revalidate: 3600 } // Cache for 1 hour
+      next: { revalidate: 3600 }, // Cache for 1 hour
+      headers: githubHeaders,
     });
     if (resGh.ok) {
       githubBuildData = await resGh.json();
-      
+
       try {
-        const resRepos = await fetch("https://api.github.com/users/vanujak/repos?per_page=100", {
-          next: { revalidate: 3600 }
-        });
+        const resRepos = await fetch(
+          "https://api.github.com/users/vanujak/repos?per_page=100",
+          {
+            next: { revalidate: 3600 },
+            headers: githubHeaders,
+          },
+        );
         if (resRepos.ok) {
           const repos = await resRepos.json();
           if (Array.isArray(repos)) {
-            const stars = repos.reduce((acc, repo) => acc + (repo.stargazers_count || 0), 0);
+            const stars = repos.reduce(
+              (acc, repo) => acc + (repo.stargazers_count || 0),
+              0,
+            );
             const langMap = {};
-            repos.forEach(repo => {
+            repos.forEach((repo) => {
               if (repo.language) {
                 langMap[repo.language] = (langMap[repo.language] || 0) + 1;
               }
@@ -39,10 +53,13 @@ async function getStatsData() {
             const sortedLangs = Object.entries(langMap)
               .sort((a, b) => b[1] - a[1])
               .slice(0, 3)
-              .map(entry => entry[0]);
+              .map((entry) => entry[0]);
 
             githubBuildData.stars = stars;
-            githubBuildData.languages = sortedLangs.length > 0 ? sortedLangs : ["Java", "JavaScript", "Python"];
+            githubBuildData.languages =
+              sortedLangs.length > 0
+                ? sortedLangs
+                : ["Java", "JavaScript", "Python"];
           }
         }
       } catch (repoErr) {
@@ -55,9 +72,12 @@ async function getStatsData() {
 
   // 2. Fetch LeetCode data at build time via FaisalShohag API proxy
   try {
-    const resLc = await fetch("https://leetcode-api-faisalshohag.vercel.app/vanujak", {
-      next: { revalidate: 3600 }
-    });
+    const resLc = await fetch(
+      "https://leetcode-api-faisalshohag.vercel.app/vanujak",
+      {
+        next: { revalidate: 3600 },
+      },
+    );
     if (resLc.ok) {
       const lcData = await resLc.json();
       if (lcData && lcData.totalQuestions >= 0) {
@@ -73,7 +93,14 @@ async function getStatsData() {
           totalMedium: lcData.totalMedium || 2081,
           totalHard: lcData.totalHard || 951,
           ranking: lcData.ranking || 5000000,
-          acceptanceRate: lcData.totalSolved ? Number(((lcData.totalSolved / (lcData.totalSolved + 10)) * 100).toFixed(1)) : 0.0
+          acceptanceRate: lcData.totalSolved
+            ? Number(
+                (
+                  (lcData.totalSolved / (lcData.totalSolved + 10)) *
+                  100
+                ).toFixed(1),
+              )
+            : 0.0,
         };
       }
     }
@@ -108,7 +135,10 @@ export default async function Home() {
         <Experience />
         <Projects />
         <Certificates />
-        <CodingStats githubBuildData={githubBuildData} leetcodeBuildData={leetcodeBuildData} />
+        <CodingStats
+          githubBuildData={githubBuildData}
+          leetcodeBuildData={leetcodeBuildData}
+        />
         <Skills />
         <Contact />
       </main>
