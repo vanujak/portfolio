@@ -16,7 +16,7 @@ export default function Certificates() {
       credentialId: "CLF-C02",
       verifyLink:
         "https://www.credly.com/badges/fbc48134-e058-4abc-808f-d5e0958e9646/public_url",
-      badgeImage:
+      logoImage:
         "https://images.credly.com/images/00634f82-b07f-4bbd-a6bb-53de397fc3a6/image.png",
       category: "Cloud Computing",
     },
@@ -28,6 +28,7 @@ export default function Certificates() {
       credentialId: "UC-108eaebf-7829-4316-ae35-0f2320ec9b3b",
       verifyLink:
         "https://www.udemy.com/certificate/UC-108eaebf-7829-4316-ae35-0f2320ec9b3b/",
+      logoImage: `${basePath}/certificates/udemy-logo.webp`,
       category: "Software Engineering",
     },
     {
@@ -37,6 +38,7 @@ export default function Certificates() {
       date: "2026",
       credentialId: "E8963B37961D36B32D76697DA6B",
       verifyLink: `${basePath}/certificates/namasteNode.webp`,
+      logoImage: `${basePath}/certificates/namastedev-logo.png`,
       category: "Backend Development",
     },
     {
@@ -46,6 +48,7 @@ export default function Certificates() {
       date: "2026",
       credentialId: "E8963B37961D36B32D76697D84B",
       verifyLink: `${basePath}/certificates/namasteJavaScript.webp`,
+      logoImage: `${basePath}/certificates/namastedev-logo.png`,
       category: "Programming",
     },
   ];
@@ -116,10 +119,10 @@ export default function Certificates() {
                 </div>
 
                 <div className="flex items-start gap-3 sm:gap-4">
-                  {cert.badgeImage && (
+                  {cert.logoImage && (
                     <Image
-                      src={cert.badgeImage}
-                      alt={`${cert.title} badge`}
+                      src={cert.logoImage}
+                      alt={`${cert.issuer} logo`}
                       width={64}
                       height={64}
                       className="w-14 h-14 sm:w-16 sm:h-16 shrink-0 object-contain"
