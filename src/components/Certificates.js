@@ -1,6 +1,20 @@
+import Image from "next/image";
+
 export default function Certificates() {
-  const basePath = process.env.NEXT_PUBLIC_IS_STATIC_EXPORT === 'true' ? '/portfolio' : '';
+  const basePath =
+    process.env.NEXT_PUBLIC_IS_STATIC_EXPORT === "true" ? "/portfolio" : "";
   const certificates = [
+    {
+      title: "AWS Certified Cloud Practitioner",
+      issuer: "Amazon Web Services Training and Certification",
+      date: "2026",
+      credentialId: "CLF-C02",
+      verifyLink:
+        "https://www.credly.com/badges/fbc48134-e058-4abc-808f-d5e0958e9646/public_url",
+      badgeImage:
+        "https://images.credly.com/images/00634f82-b07f-4bbd-a6bb-53de397fc3a6/image.png",
+      category: "Cloud Computing",
+    },
     {
       title: "Low Level System Design, Design Patterns & SOLID Principles",
       issuer: "Udemy",
@@ -62,15 +76,29 @@ export default function Certificates() {
                   </span>
                 </div>
 
-                {/* Title */}
-                <h3 className="text-base font-bold text-zinc-900 dark:text-zinc-50 leading-snug mb-2 group-hover:text-indigo-500 transition-colors">
-                  {cert.title}
-                </h3>
+                <div className="flex items-start gap-4">
+                  {cert.badgeImage && (
+                    <Image
+                      src={cert.badgeImage}
+                      alt={`${cert.title} badge`}
+                      width={64}
+                      height={64}
+                      className="w-16 h-16 shrink-0 object-contain"
+                    />
+                  )}
 
-                {/* Issuer */}
-                <p className="text-sm font-medium text-zinc-650 dark:text-zinc-400">
-                  {cert.issuer}
-                </p>
+                  <div>
+                    {/* Title */}
+                    <h3 className="text-base font-bold text-zinc-900 dark:text-zinc-50 leading-snug mb-2 group-hover:text-indigo-500 transition-colors">
+                      {cert.title}
+                    </h3>
+
+                    {/* Issuer */}
+                    <p className="text-sm font-medium text-zinc-650 dark:text-zinc-400">
+                      {cert.issuer}
+                    </p>
+                  </div>
+                </div>
               </div>
 
               {/* ID & Link Footer */}

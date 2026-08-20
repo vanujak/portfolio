@@ -6,6 +6,12 @@ const nextConfig = {
   basePath: isStatic ? '/portfolio' : '',
   images: {
     unoptimized: true,
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'images.credly.com',
+      },
+    ],
   },
 };
 
