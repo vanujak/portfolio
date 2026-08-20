@@ -1,10 +1,15 @@
+"use client";
+
+import { useState } from "react";
 import Image from "next/image";
 
 export default function Certificates() {
+  const [activeType, setActiveType] = useState("certificate");
   const basePath =
     process.env.NEXT_PUBLIC_IS_STATIC_EXPORT === "true" ? "/portfolio" : "";
   const certificates = [
     {
+      type: "certificate",
       title: "AWS Certified Cloud Practitioner",
       issuer: "Amazon Web Services Training and Certification",
       date: "2026",
@@ -16,6 +21,7 @@ export default function Certificates() {
       category: "Cloud Computing",
     },
     {
+      type: "course",
       title: "Low Level System Design, Design Patterns & SOLID Principles",
       issuer: "Udemy",
       date: "2026",
@@ -25,6 +31,7 @@ export default function Certificates() {
       category: "Software Engineering",
     },
     {
+      type: "course",
       title: "Namaste Node.js",
       issuer: "Namaste Dev",
       date: "2026",
@@ -33,6 +40,7 @@ export default function Certificates() {
       category: "Backend Development",
     },
     {
+      type: "course",
       title: "Namaste JavaScript",
       issuer: "Namaste Dev",
       date: "2026",
@@ -41,6 +49,13 @@ export default function Certificates() {
       category: "Programming",
     },
   ];
+  const certificateTypes = [
+    { id: "certificate", label: "Certificates" },
+    { id: "course", label: "Courses" },
+  ];
+  const filteredCertificates = certificates.filter(
+    (cert) => cert.type === activeType,
+  );
 
   return (
     <section id="certificates" className="py-24 bg-transparent">
@@ -58,11 +73,35 @@ export default function Certificates() {
           </p>
         </div>
 
+        <div className="flex justify-center mb-8">
+          <div className="inline-flex rounded-full border border-zinc-200/50 dark:border-zinc-800/50 bg-background-secondary/35 p-1">
+            {certificateTypes.map((type) => {
+              const isActive = activeType === type.id;
+
+              return (
+                <button
+                  key={type.id}
+                  type="button"
+                  onClick={() => setActiveType(type.id)}
+                  aria-pressed={isActive}
+                  className={`rounded-full px-4 py-2 text-xs font-bold transition-all duration-300 ${
+                    isActive
+                      ? "bg-indigo-600 text-white shadow-sm dark:bg-indigo-500"
+                      : "text-zinc-500 hover:text-indigo-600 dark:text-zinc-400 dark:hover:text-indigo-400"
+                  }`}
+                >
+                  {type.label}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
         {/* Certificates Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {certificates.map((cert, index) => (
+          {filteredCertificates.map((cert, index) => (
             <div
-              key={index}
+              key={cert.credentialId}
               className="group bg-background-secondary/35 border border-zinc-200/40 dark:border-zinc-800/30 rounded-2xl p-6 shadow-xs hover:scale-[1.02] hover:border-indigo-500/50 dark:hover:border-indigo-400/50 hover:shadow-md transition-all duration-300 flex flex-col justify-between"
             >
               <div>
