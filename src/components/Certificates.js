@@ -74,7 +74,7 @@ export default function Certificates() {
         </div>
 
         <div className="flex justify-center mb-8">
-          <div className="inline-flex rounded-full border border-zinc-200/50 dark:border-zinc-800/50 bg-background-secondary/35 p-1">
+          <div className="inline-flex w-full max-w-xs sm:w-auto rounded-full border border-zinc-200/50 dark:border-zinc-800/50 bg-background-secondary/35 p-1">
             {certificateTypes.map((type) => {
               const isActive = activeType === type.id;
 
@@ -84,7 +84,7 @@ export default function Certificates() {
                   type="button"
                   onClick={() => setActiveType(type.id)}
                   aria-pressed={isActive}
-                  className={`rounded-full px-4 py-2 text-xs font-bold transition-all duration-300 ${
+                  className={`flex-1 sm:flex-none rounded-full px-4 py-2 text-xs font-bold transition-all duration-300 ${
                     isActive
                       ? "bg-indigo-600 text-white shadow-sm dark:bg-indigo-500"
                       : "text-zinc-500 hover:text-indigo-600 dark:text-zinc-400 dark:hover:text-indigo-400"
@@ -115,18 +115,18 @@ export default function Certificates() {
                   </span>
                 </div>
 
-                <div className="flex items-start gap-4">
+                <div className="flex items-start gap-3 sm:gap-4">
                   {cert.badgeImage && (
                     <Image
                       src={cert.badgeImage}
                       alt={`${cert.title} badge`}
                       width={64}
                       height={64}
-                      className="w-16 h-16 shrink-0 object-contain"
+                      className="w-14 h-14 sm:w-16 sm:h-16 shrink-0 object-contain"
                     />
                   )}
 
-                  <div>
+                  <div className="min-w-0">
                     {/* Title */}
                     <h3 className="text-base font-bold text-zinc-900 dark:text-zinc-50 leading-snug mb-2 group-hover:text-indigo-500 transition-colors">
                       {cert.title}
@@ -141,15 +141,15 @@ export default function Certificates() {
               </div>
 
               {/* ID & Link Footer */}
-              <div className="mt-6 pt-4 border-t border-zinc-200/30 dark:border-zinc-800/30 flex items-center justify-between">
-                <span className="text-[11px] font-mono text-zinc-400 dark:text-zinc-500">
+              <div className="mt-6 pt-4 border-t border-zinc-200/30 dark:border-zinc-800/30 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                <span className="text-[11px] font-mono text-zinc-400 dark:text-zinc-500 break-all sm:break-normal">
                   ID: {cert.credentialId}
                 </span>
                 <a
                   href={cert.verifyLink}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-xs font-bold text-indigo-600 dark:text-indigo-400 hover:opacity-80 transition-opacity flex items-center gap-1 cursor-pointer"
+                  className="text-xs font-bold text-indigo-600 dark:text-indigo-400 hover:opacity-80 transition-opacity flex items-center gap-1 cursor-pointer self-start sm:self-auto"
                 >
                   Verify
                   <svg
