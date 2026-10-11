@@ -6,6 +6,7 @@ export default function Contact() {
   const socialLinks = {
     github: "https://github.com/vanujak",
     linkedin: "https://linkedin.com/in/vanujak",
+    credly: "https://www.credly.com/users/vanujak",
     twitter: "https://twitter.com/vanuja__",
     instagram: "https://instagram.com/vanuja___",
     discord: "https://discord.com/users/vanujak",
@@ -185,8 +186,8 @@ export default function Contact() {
             </div>
 
             {/* Social handles */}
-            <div className="mt-8 lg:mt-0 flex gap-4">
-              {["github", "linkedin", "twitter", "instagram", "discord"].map(
+            <div className="mt-8 lg:mt-0 flex gap-4 flex-wrap">
+              {["github", "linkedin", "credly", "twitter", "instagram", "discord"].map(
                 (platform) => (
                   <a
                     key={platform}
@@ -194,6 +195,7 @@ export default function Contact() {
                     target="_blank"
                     rel="noopener noreferrer"
                     className="w-10 h-10 rounded-full bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 flex items-center justify-center text-zinc-600 dark:text-zinc-400 hover:text-indigo-600 dark:hover:text-indigo-400 hover:border-indigo-100 dark:hover:border-indigo-900/50 transition-all duration-200"
+                    title={platform === "credly" ? "Credly Digital Badges" : platform}
                   >
                     <span className="sr-only">{platform}</span>
                     {platform === "github" && (
@@ -212,6 +214,15 @@ export default function Contact() {
                         viewBox="0 0 24 24"
                       >
                         <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+                      </svg>
+                    )}
+                    {platform === "credly" && (
+                      <svg
+                        className="w-5 h-5 text-amber-600 dark:text-amber-400"
+                        fill="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path d="M12 2L14.85 8.08L21.5 8.64L16.42 13.01L17.96 19.52L12 16.05L6.04 19.52L7.58 13.01L2.5 8.64L9.15 8.08L12 2Z" />
                       </svg>
                     )}
                     {platform === "twitter" && (

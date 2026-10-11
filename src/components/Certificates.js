@@ -2,6 +2,15 @@ export default function Certificates() {
   const basePath = process.env.NEXT_PUBLIC_IS_STATIC_EXPORT === 'true' ? '/portfolio' : '';
   const certificates = [
     {
+      title: "Credly Digital Badge Credentials",
+      issuer: "Credly Verified Badges",
+      date: "2026",
+      credentialId: "CREDLY-PROFILE",
+      verifyLink: "https://www.credly.com/users/vanujak",
+      category: "Cloud & DevOps",
+      isCredly: true,
+    },
+    {
       title: "Low Level System Design, Design Patterns & SOLID Principles",
       issuer: "Udemy",
       date: "2026",
@@ -39,9 +48,24 @@ export default function Certificates() {
             Certifications & Licenses
           </h2>
           <p className="text-zinc-600 dark:text-zinc-400 mt-4">
-            A verified collection of professional cloud, DevOps, and machine
-            learning credentials I have earned.
+            A verified collection of professional cloud, DevOps, and software engineering credentials I have earned.
           </p>
+          <div className="mt-6 flex justify-center">
+            <a
+              href="https://www.credly.com/users/vanujak"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-bold text-amber-700 dark:text-amber-300 bg-amber-500/10 dark:bg-amber-400/10 border border-amber-500/30 dark:border-amber-400/30 hover:bg-amber-500/20 dark:hover:bg-amber-400/20 shadow-xs hover:shadow-md transition-all duration-200"
+            >
+              <svg className="w-4 h-4 text-amber-600 dark:text-amber-400" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2L14.85 8.08L21.5 8.64L16.42 13.01L17.96 19.52L12 16.05L6.04 19.52L7.58 13.01L2.5 8.64L9.15 8.08L12 2Z" />
+              </svg>
+              View Verified Badges on Credly
+              <svg className="w-3.5 h-3.5 opacity-70" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
+              </svg>
+            </a>
+          </div>
         </div>
 
         {/* Certificates Grid */}
