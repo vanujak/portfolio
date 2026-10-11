@@ -9,17 +9,6 @@ export default function Certificates() {
     process.env.NEXT_PUBLIC_IS_STATIC_EXPORT === "true" ? "/portfolio" : "";
   const certificates = [
     {
-<<<<<<< HEAD
-      title: "Credly Digital Badge Credentials",
-      issuer: "Credly Verified Badges",
-      date: "2026",
-      credentialId: "CREDLY-PROFILE",
-      verifyLink: "https://www.credly.com/users/vanujak",
-      category: "Cloud & DevOps",
-      isCredly: true,
-    },
-    {
-=======
       type: "certificate",
       title: "AWS Certified Cloud Practitioner",
       issuer: "Amazon Web Services Training and Certification",
@@ -33,7 +22,6 @@ export default function Certificates() {
     },
     {
       type: "course",
->>>>>>> 96c09ebca5c11b95d292f0204c5b3043cc988db1
       title: "Low Level System Design, Design Patterns & SOLID Principles",
       issuer: "Udemy",
       date: "2026",
