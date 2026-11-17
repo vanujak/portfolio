@@ -79,7 +79,7 @@ body {
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-  background: #6366f1; /* Indigo-500 thumb on hover */
+  background: #10b981; /* Emerald-500 thumb on hover */
 }
 
 /* Global Website Scrollbar styling */
