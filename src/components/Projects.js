@@ -93,22 +93,22 @@ export default function Projects() {
           {projects.map((project, index) => (
             <div
               key={index}
-              className="group flex flex-col h-full bg-background-secondary border border-zinc-200/50 dark:border-zinc-800/50 rounded-2xl p-4 sm:p-5 hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
+              className="group flex flex-col h-full bg-background-secondary border border-zinc-200/70 dark:border-zinc-800/70 rounded-2xl p-4 sm:p-5 hover:border-indigo-500/40 dark:hover:border-indigo-400/40 transition-colors duration-200"
             >
               {/* Card visual header */}
-              <div className="h-36 sm:h-40 w-full bg-background dark:bg-zinc-900/50 rounded-xl mb-3.5 sm:mb-4 flex items-center justify-center relative overflow-hidden">
+              <div className="h-36 sm:h-40 w-full bg-background dark:bg-zinc-900/50 rounded-xl mb-3.5 sm:mb-4 flex items-center justify-center relative overflow-hidden border border-zinc-200/50 dark:border-zinc-800/50">
                 {project.image ? (
                   <Image
                     src={`${basePath}${project.image}`}
                     alt={project.title}
                     fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-500"
+                    className="object-cover"
                   />
                 ) : (
                   <>
                     {/* Decorative coding icon */}
                     <svg
-                      className="w-12 h-12 text-indigo-500/60 dark:text-indigo-400/40 group-hover:scale-110 transition-transform duration-300"
+                      className="w-12 h-12 text-indigo-500/60 dark:text-indigo-400/40"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
@@ -205,16 +205,18 @@ export default function Projects() {
           <div className="absolute inset-0" onClick={() => setActiveProject(null)} />
 
           {/* Banner content */}
-          <div className="relative z-10 bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-900 rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-2xl flex flex-col items-center text-center">
-            <div className="w-14 h-14 rounded-full bg-amber-50 dark:bg-amber-950/40 border border-amber-100/50 dark:border-amber-900/30 flex items-center justify-center text-2xl mb-4">
-              ⚠️
+          <div className="relative z-10 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl max-w-md w-full p-6 sm:p-8 shadow-2xl flex flex-col items-center text-center">
+            <div className="w-12 h-12 rounded-xl bg-amber-50 dark:bg-amber-950/40 border border-amber-200/60 dark:border-amber-900/40 flex items-center justify-center text-amber-600 dark:text-amber-400 mb-4">
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
+              </svg>
             </div>
 
             <h3 className="text-lg font-bold text-zinc-900 dark:text-zinc-50 mb-2">
               Live Demo Offline
             </h3>
 
-            <p className="text-sm text-zinc-650 dark:text-zinc-400 leading-relaxed mb-6">
+            <p className="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed mb-6">
               We apologize, but a live demo server is not currently hosting <strong className="text-zinc-900 dark:text-zinc-200">{activeProject.title}</strong>. 
               You can view the full codebase, infrastructure deployment scripts, and configuration steps directly on GitHub!
             </p>
@@ -224,7 +226,7 @@ export default function Projects() {
                 href={activeProject.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex-grow inline-flex items-center justify-center gap-1.5 bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs px-5 py-3 rounded-2xl shadow-sm hover:shadow-md transition-all cursor-pointer"
+                className="flex-grow inline-flex items-center justify-center gap-1.5 bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs px-5 py-3 rounded-xl shadow-xs transition-colors cursor-pointer"
                 onClick={() => setActiveProject(null)}
               >
                 Go to GitHub Repo
@@ -234,7 +236,7 @@ export default function Projects() {
               </a>
               <button
                 onClick={() => setActiveProject(null)}
-                className="inline-flex items-center justify-center bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-zinc-700 dark:text-zinc-350 font-bold text-xs px-5 py-3 rounded-2xl hover:bg-zinc-200 dark:hover:bg-zinc-800 transition-colors cursor-pointer"
+                className="inline-flex items-center justify-center bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 font-bold text-xs px-5 py-3 rounded-xl hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors cursor-pointer"
               >
                 Close
               </button>

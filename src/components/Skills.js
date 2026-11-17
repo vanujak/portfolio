@@ -195,9 +195,9 @@ export default function Skills() {
           {skillCategories.map((category, index) => (
             <div
               key={index}
-              className="bg-background/80 dark:bg-zinc-950/40 border border-zinc-200/30 dark:border-zinc-900/30 rounded-2xl sm:rounded-3xl p-4 sm:p-6 flex flex-col h-full shadow-xs"
+              className="bg-background/80 dark:bg-zinc-900/40 border border-zinc-200/70 dark:border-zinc-800/70 rounded-2xl p-4 sm:p-6 flex flex-col h-full shadow-xs"
             >
-              <h3 className="text-base font-bold text-zinc-900 dark:text-zinc-50 border-b border-zinc-200/30 dark:border-zinc-900/30 pb-2.5 sm:pb-3 mb-3 sm:mb-4 uppercase tracking-wider text-xs">
+              <h3 className="font-bold text-zinc-900 dark:text-zinc-50 border-b border-zinc-200/50 dark:border-zinc-800/50 pb-2.5 sm:pb-3 mb-3 sm:mb-4 uppercase tracking-wider text-xs">
                 {category.title}
               </h3>
 
@@ -206,14 +206,14 @@ export default function Skills() {
                 {category.skills.map((skill, sIndex) => (
                   <div
                     key={sIndex}
-                    className="flex items-center gap-2.5 sm:gap-3 bg-background/50 dark:bg-zinc-900/10 border border-zinc-200/40 dark:border-zinc-800/40 rounded-xl p-2 sm:p-2.5 hover:scale-[1.02] hover:border-indigo-500/50 dark:hover:border-indigo-400/50 hover:shadow-xs transition-all duration-300 group"
+                    className="flex items-center gap-2.5 sm:gap-3 bg-background/60 dark:bg-zinc-900/50 border border-zinc-200/60 dark:border-zinc-800/60 rounded-xl p-2 sm:p-2.5 hover:border-indigo-500/50 dark:hover:border-indigo-400/50 transition-colors duration-200 group"
                   >
                     {/* SVG Icon on Left */}
-                    <div className="flex-shrink-0 text-zinc-500 dark:text-zinc-450 group-hover:scale-110 transition-transform duration-300">
-                      {skillIcons[skill.name] || <span className="text-xl">🛠️</span>}
+                    <div className="flex-shrink-0 text-zinc-500 dark:text-zinc-400">
+                      {skillIcons[skill.name]}
                     </div>
                     {/* Skill Name on Right */}
-                    <span className="text-xs sm:text-sm font-bold text-zinc-800 dark:text-zinc-200 truncate select-none">
+                    <span className="text-xs sm:text-sm font-semibold text-zinc-800 dark:text-zinc-200 truncate select-none">
                       {skill.name}
                     </span>
                   </div>

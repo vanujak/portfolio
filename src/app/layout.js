@@ -35,7 +35,7 @@ export const metadata = {
     follow: true,
   },
   icons: {
-    icon: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="90">👨‍💻</text></svg>',
+    icon: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><rect width="32" height="32" rx="8" fill="%2318181b"/><path d="M9 11l5 5-5 5M16 21h7" stroke="%236366f1" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>',
   },
   openGraph: {
     title: "Vanuja Karunaratne | Portfolio",

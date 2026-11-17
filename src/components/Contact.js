@@ -177,7 +177,7 @@ export default function Contact() {
                       Location
                     </div>
                     <div className="text-sm font-semibold text-zinc-700 dark:text-zinc-300">
-                      Ratnaputa, Sri Lanka
+                      Ratnapura, Sri Lanka
                     </div>
                   </div>
                 </div>
@@ -252,7 +252,7 @@ export default function Contact() {
           <div className="lg:col-span-7">
             <form
               onSubmit={handleSubmit}
-              className="bg-background-secondary border border-zinc-200/50 dark:border-zinc-800/50 rounded-2xl sm:rounded-3xl p-4 sm:p-6 space-y-3.5 sm:space-y-4"
+              className="bg-background-secondary border border-zinc-200/70 dark:border-zinc-800/70 rounded-2xl p-4 sm:p-6 space-y-3.5 sm:space-y-4"
             >
               <div>
                 <label
@@ -328,7 +328,7 @@ export default function Contact() {
               {status === "error" && (
                 <p className="text-sm font-medium text-rose-600 dark:text-rose-400 text-center animate-fade-in">
                   Something went wrong. Please try again or email
-                  hello@example.com directly.
+                  vanujakofficial@gmail.com directly.
                 </p>
               )}
             </form>

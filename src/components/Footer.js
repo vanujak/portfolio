@@ -69,11 +69,11 @@ export default function Footer() {
 
           {/* Copyright & Last Updated */}
           <div className="flex flex-col items-center md:items-start gap-1">
-            <p className="text-xs text-zinc-550 dark:text-zinc-500 text-center md:text-left">
+            <p className="text-xs text-zinc-500 dark:text-zinc-500 text-center md:text-left">
               &copy; {currentYear} Portfolio. All rights reserved. Built with
               Next.js and Tailwind CSS.
             </p>
-            <p className="text-[10px] text-zinc-400 dark:text-zinc-650 font-medium">
+            <p className="text-[10px] text-zinc-400 dark:text-zinc-600 font-medium">
               Last updated: {lastUpdated}
             </p>
           </div>
@@ -106,9 +106,9 @@ export default function Footer() {
           />
 
           {/* Modal box */}
-          <div className="relative z-10 bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-900 rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl flex flex-col h-full max-h-[85vh]">
+          <div className="relative z-10 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl max-w-lg w-full p-6 sm:p-8 shadow-2xl flex flex-col h-full max-h-[85vh]">
             {/* Modal Header */}
-            <div className="flex items-center justify-between border-b border-zinc-150 dark:border-zinc-900 pb-4 mb-5 flex-shrink-0">
+            <div className="flex items-center justify-between border-b border-zinc-200 dark:border-zinc-800 pb-4 mb-5 flex-shrink-0">
               <h3 className="text-lg font-bold text-zinc-900 dark:text-zinc-50">
                 {activeModal === "privacy" ? "Privacy Policy" : "Terms of Use"}
               </h3>
@@ -134,7 +134,7 @@ export default function Footer() {
             </div>
 
             {/* Modal Content Scroll Area */}
-            <div className="flex-grow overflow-y-auto space-y-4 pr-1 text-sm text-zinc-650 dark:text-zinc-400 leading-relaxed custom-scrollbar select-text">
+            <div className="flex-grow overflow-y-auto space-y-4 pr-1 text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed custom-scrollbar select-text">
               {activeModal === "privacy" ? (
                 <>
                   <p className="font-semibold text-zinc-800 dark:text-zinc-200">
@@ -221,7 +221,7 @@ export default function Footer() {
             </div>
 
             {/* Modal Footer */}
-            <div className="border-t border-zinc-150 dark:border-zinc-900 pt-4 mt-5 flex justify-end flex-shrink-0">
+            <div className="border-t border-zinc-200 dark:border-zinc-800 pt-4 mt-5 flex justify-end flex-shrink-0">
               <button
                 onClick={() => setActiveModal(null)}
                 className="px-6 py-2.5 rounded-xl bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-900 dark:hover:bg-zinc-800 text-zinc-700 dark:text-zinc-300 font-bold text-sm transition-colors cursor-pointer focus:outline-none"

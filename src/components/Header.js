@@ -97,8 +97,8 @@ export default function Header() {
     <header
       className={`fixed top-0 left-0 right-0 z-50 border-b transition-all duration-300 ${
         scrolled || isOpen
-          ? 'bg-white/90 dark:bg-black/90 backdrop-blur-xl border-zinc-200/50 dark:border-zinc-900/50 shadow-sm py-4'
-          : 'bg-transparent border-transparent py-6'
+          ? 'bg-white/90 dark:bg-zinc-950/90 backdrop-blur-xl border-zinc-200/70 dark:border-zinc-800/70 shadow-xs py-4'
+          : 'bg-transparent border-transparent py-5'
       }`}
     >
       <div className="max-w-6xl mx-auto px-6 flex justify-between items-center">
@@ -132,7 +132,7 @@ export default function Header() {
           <div className="relative">
             <button
               onClick={(e) => { e.stopPropagation(); setDropdownOpen(!dropdownOpen); }}
-              className="p-2.5 rounded-full border border-zinc-200 dark:border-zinc-800/80 bg-zinc-50/50 dark:bg-zinc-900/50 text-zinc-650 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-800/60 transition-all duration-200 shadow-xs cursor-pointer flex items-center justify-center"
+              className="p-2.5 rounded-full border border-zinc-200 dark:border-zinc-800 bg-zinc-50/50 dark:bg-zinc-900/50 text-zinc-600 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-800/60 transition-all duration-200 shadow-xs cursor-pointer flex items-center justify-center"
               aria-label="Select theme"
             >
               {theme === 'dark' ? (
@@ -235,7 +235,7 @@ export default function Header() {
 
       {/* Mobile Navigation Panel */}
       <div 
-        className={`md:hidden absolute top-full left-0 right-0 bg-white/90 dark:bg-black/90 backdrop-blur-xl border-b border-zinc-200/50 dark:border-zinc-800/50 px-6 flex flex-col overflow-y-auto transition-all duration-350 ease-in-out ${
+        className={`md:hidden absolute top-full left-0 right-0 bg-white/95 dark:bg-zinc-950/95 backdrop-blur-xl border-b border-zinc-200 dark:border-zinc-800 px-6 flex flex-col overflow-y-auto transition-all duration-300 ease-in-out ${
           isOpen 
             ? 'opacity-100 translate-y-0 py-6 h-[calc(100vh-64px)] pointer-events-auto visible' 
             : 'opacity-0 -translate-y-2 py-0 h-0 pointer-events-none invisible'

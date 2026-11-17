@@ -72,7 +72,7 @@ export default function Certificates() {
           {certificates.map((cert) => (
             <div
               key={cert.credentialId}
-              className="group bg-background-secondary/35 border border-zinc-200/40 dark:border-zinc-800/30 rounded-2xl p-4 sm:p-5 shadow-xs hover:border-indigo-500/50 dark:hover:border-indigo-400/50 hover:shadow-md transition-all duration-300 flex flex-col justify-between"
+              className="group bg-background-secondary/50 border border-zinc-200/70 dark:border-zinc-800/70 rounded-2xl p-4 sm:p-5 hover:border-indigo-500/40 dark:hover:border-indigo-400/40 transition-colors duration-200 flex flex-col justify-between"
             >
               <div>
                 {/* Header Tag / Category */}
