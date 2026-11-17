@@ -32,6 +32,13 @@ export default function Hero() {
   const [commandHistory, setCommandHistory] = useState(["whoami"]);
   const [historyIndex, setHistoryIndex] = useState(-1);
 
+  // Auto-focus terminal input on desktop load without scrolling the page
+  useEffect(() => {
+    if (typeof window !== "undefined" && window.innerWidth >= 1024) {
+      inputRef.current?.focus({ preventScroll: true });
+    }
+  }, []);
+
   // Auto-scroll ONLY the terminal log container when new commands are added
   useEffect(() => {
     if (isInitialMount.current) {
@@ -136,7 +143,7 @@ export default function Hero() {
   };
 
   const focusInput = () => {
-    inputRef.current?.focus();
+    inputRef.current?.focus({ preventScroll: true });
   };
 
   return (
@@ -289,19 +296,29 @@ export default function Hero() {
                 <span className="text-emerald-400 font-bold flex-shrink-0 select-none">
                   vanuja@devops-node:~$
                 </span>
-                <input
-                  ref={inputRef}
-                  type="text"
-                  value={input}
-                  onChange={(e) => setInput(e.target.value)}
-                  onKeyDown={handleKeyDown}
-                  placeholder="type a command (e.g. 'help', 'projects', 'skills')..."
-                  className="flex-grow bg-transparent text-zinc-50 placeholder:text-zinc-600 focus:outline-none border-none caret-emerald-400 selection:bg-emerald-500/30"
-                  autoComplete="off"
-                  autoCorrect="off"
-                  autoCapitalize="off"
-                  spellCheck="false"
-                />
+                <div className="relative flex-grow flex items-center">
+                  {input.length === 0 && (
+                    <span
+                      className="w-2 h-4 bg-emerald-400 animate-pulse mr-2 flex-shrink-0 pointer-events-none"
+                      aria-hidden="true"
+                    />
+                  )}
+                  <input
+                    ref={inputRef}
+                    type="text"
+                    value={input}
+                    onChange={(e) => setInput(e.target.value)}
+                    onKeyDown={handleKeyDown}
+                    placeholder="type a command (e.g. 'help', 'projects', 'skills')..."
+                    className={`w-full bg-transparent text-zinc-50 placeholder:text-zinc-600 focus:outline-none border-none selection:bg-emerald-500/30 ${
+                      input.length === 0 ? "caret-transparent" : "caret-emerald-400"
+                    }`}
+                    autoComplete="off"
+                    autoCorrect="off"
+                    autoCapitalize="off"
+                    spellCheck="false"
+                  />
+                </div>
               </form>
             </div>
           </div>
