@@ -82,7 +82,7 @@ export default function Projects() {
           <h2 className="text-3xl sm:text-4xl font-bold text-zinc-900 dark:text-zinc-50 mt-2">
             Featured Projects
           </h2>
-          <p className="text-zinc-650 dark:text-zinc-400 mt-4">
+          <p className="text-zinc-600 dark:text-zinc-400 mt-4">
             A selection of my recent works. Each project represents different
             engineering challenges and how they were solved.
           </p>

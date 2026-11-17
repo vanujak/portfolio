@@ -185,7 +185,7 @@ export default function Skills() {
           <h2 className="text-3xl sm:text-4xl font-bold text-zinc-900 dark:text-zinc-50 mt-2">
             Technical Skills
           </h2>
-          <p className="text-zinc-650 dark:text-zinc-400 mt-4 text-sm sm:text-base animate-fade-in">
+          <p className="text-zinc-600 dark:text-zinc-400 mt-4">
             A verified directory of technologies, libraries, and automated tooling I work with.
           </p>
         </div>
