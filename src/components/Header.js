@@ -6,8 +6,7 @@ import Link from 'next/link';
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [theme, setTheme] = useState('system');
-  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [theme, setTheme] = useState('light');
 
   useEffect(() => {
     const handleScroll = () => {
@@ -21,49 +20,25 @@ export default function Header() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Initialize theme on mount
+  // Initialize theme on mount (saved preference or OS default)
   useEffect(() => {
-    const savedTheme = localStorage.getItem('theme') || 'system';
-    setTheme(savedTheme);
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark' || savedTheme === 'light') {
+      setTheme(savedTheme);
+    } else {
+      const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      setTheme(systemPrefersDark ? 'dark' : 'light');
+    }
   }, []);
 
-  // Apply theme class dynamically based on user selection or media preference
+  // Apply theme class dynamically
   useEffect(() => {
-    const applyTheme = () => {
-      if (theme === 'dark') {
-        document.documentElement.classList.add('dark');
-      } else if (theme === 'light') {
-        document.documentElement.classList.remove('dark');
-      } else {
-        const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        if (systemPrefersDark) {
-          document.documentElement.classList.add('dark');
-        } else {
-          document.documentElement.classList.remove('dark');
-        }
-      }
-    };
-
-    applyTheme();
-
-    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-    const handleSystemChange = () => {
-      if (theme === 'system') {
-        applyTheme();
-      }
-    };
-
-    mediaQuery.addEventListener('change', handleSystemChange);
-    return () => mediaQuery.removeEventListener('change', handleSystemChange);
+    if (theme === 'dark') {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
   }, [theme]);
-
-  // Click outside to close the popover dropdown
-  useEffect(() => {
-    if (!dropdownOpen) return;
-    const closeDropdown = () => setDropdownOpen(false);
-    window.addEventListener('click', closeDropdown);
-    return () => window.removeEventListener('click', closeDropdown);
-  }, [dropdownOpen]);
 
   // Prevent background scrolling when mobile menu is open
   useEffect(() => {
@@ -77,10 +52,10 @@ export default function Header() {
     };
   }, [isOpen]);
 
-  const selectTheme = (newTheme) => {
-    setTheme(newTheme);
-    localStorage.setItem('theme', newTheme);
-    setDropdownOpen(false);
+  const toggleTheme = () => {
+    const nextTheme = theme === 'dark' ? 'light' : 'dark';
+    setTheme(nextTheme);
+    localStorage.setItem('theme', nextTheme);
   };
 
   const navLinks = [
@@ -127,77 +102,23 @@ export default function Header() {
             </a>
           </nav>
 
-          {/* Theme Selector Popover */}
-          <div className="relative">
-            <button
-              onClick={(e) => { e.stopPropagation(); setDropdownOpen(!dropdownOpen); }}
-              className="p-2.5 rounded-full border border-zinc-200 dark:border-zinc-800 bg-zinc-50/50 dark:bg-zinc-900/50 text-zinc-600 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-800/60 transition-all duration-200 shadow-xs cursor-pointer flex items-center justify-center"
-              aria-label="Select theme"
-            >
-              {theme === 'dark' ? (
-                <svg className="w-4.5 h-4.5 text-amber-500" fill="none" stroke="currentColor" strokeWidth={2.2} viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m0-12.728l.707.707m10.607 10.607l.707.707M12 8a4 4 0 100 8 4 4 0 000-8z" />
-                </svg>
-              ) : theme === 'light' ? (
-                <svg className="w-4.5 h-4.5 text-zinc-700 dark:text-zinc-300" fill="none" stroke="currentColor" strokeWidth={2.2} viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-                </svg>
-              ) : (
-                <svg className="w-4.5 h-4.5 text-indigo-500 dark:text-indigo-400" fill="none" stroke="currentColor" strokeWidth={2.2} viewBox="0 0 24 24">
-                  <rect x="2" y="3" width="20" height="14" rx="2" strokeLinecap="round" strokeLinejoin="round" />
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M8 21h8M12 17v4" />
-                </svg>
-              )}
-            </button>
-
-            {dropdownOpen && (
-              <div 
-                className="absolute right-0 top-12 w-28 bg-white dark:bg-zinc-950 border border-zinc-200/90 dark:border-zinc-900 rounded-2xl p-1 shadow-lg z-50 flex flex-col gap-0.5 animate-fade-in"
-                onClick={(e) => e.stopPropagation()}
-              >
-                <button
-                  onClick={() => selectTheme('light')}
-                  className={`w-full flex items-center gap-2 px-2.5 py-1.5 rounded-xl text-[11px] font-bold text-left transition-colors cursor-pointer select-none ${
-                    theme === 'light' 
-                      ? 'bg-zinc-100 dark:bg-zinc-900 text-zinc-900 dark:text-zinc-50' 
-                      : 'text-zinc-600 dark:text-zinc-400 hover:bg-zinc-50 dark:hover:bg-zinc-900/60'
-                  }`}
-                >
-                  <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth={2.2} viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-                  </svg>
-                  Light
-                </button>
-                <button
-                  onClick={() => selectTheme('dark')}
-                  className={`w-full flex items-center gap-2 px-2.5 py-1.5 rounded-xl text-[11px] font-bold text-left transition-colors cursor-pointer select-none ${
-                    theme === 'dark' 
-                      ? 'bg-zinc-100 dark:bg-zinc-900 text-zinc-900 dark:text-zinc-50' 
-                      : 'text-zinc-600 dark:text-zinc-400 hover:bg-zinc-50 dark:hover:bg-zinc-900/60'
-                  }`}
-                >
-                  <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth={2.2} viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m0-12.728l.707.707m10.607 10.607l.707.707M12 8a4 4 0 100 8 4 4 0 000-8z" />
-                  </svg>
-                  Dark
-                </button>
-                <button
-                  onClick={() => selectTheme('system')}
-                  className={`w-full flex items-center gap-2 px-2.5 py-1.5 rounded-xl text-[11px] font-bold text-left transition-colors cursor-pointer select-none ${
-                    theme === 'system' 
-                      ? 'bg-zinc-100 dark:bg-zinc-900 text-zinc-900 dark:text-zinc-50' 
-                      : 'text-zinc-600 dark:text-zinc-400 hover:bg-zinc-50 dark:hover:bg-zinc-900/60'
-                  }`}
-                >
-                  <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth={2.2} viewBox="0 0 24 24">
-                    <rect x="2" y="3" width="20" height="14" rx="2" strokeLinecap="round" strokeLinejoin="round" />
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M8 21h8M12 17v4" />
-                  </svg>
-                  System
-                </button>
-              </div>
+          {/* Single-Click Theme Toggle Button */}
+          <button
+            onClick={toggleTheme}
+            className="p-2.5 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50/50 dark:bg-zinc-900/50 text-zinc-600 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-800/60 transition-colors duration-200 shadow-xs cursor-pointer flex items-center justify-center"
+            aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+            title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+          >
+            {theme === 'dark' ? (
+              <svg className="w-4.5 h-4.5 text-amber-500" fill="none" stroke="currentColor" strokeWidth={2.2} viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m0-12.728l.707.707m10.607 10.607l.707.707M12 8a4 4 0 100 8 4 4 0 000-8z" />
+              </svg>
+            ) : (
+              <svg className="w-4.5 h-4.5 text-zinc-700 dark:text-zinc-300" fill="none" stroke="currentColor" strokeWidth={2.2} viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+              </svg>
             )}
-          </div>
+          </button>
 
           {/* Mobile Menu Button */}
           <button
