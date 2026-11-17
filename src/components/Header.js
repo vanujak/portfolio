@@ -90,7 +90,6 @@ export default function Header() {
     { name: 'Certifications', href: '#certificates' },
     { name: 'Activity', href: '#coding-stats' },
     { name: 'Skills', href: '#skills' },
-    { name: 'Contact', href: '#contact' },
   ];
 
   return (
@@ -122,7 +121,7 @@ export default function Header() {
             ))}
             <a
               href="#contact"
-              className="text-sm font-medium text-white bg-zinc-900 hover:bg-zinc-800 dark:bg-zinc-50 dark:text-zinc-900 dark:hover:bg-zinc-200 px-4 py-2 rounded-full transition-all duration-200 shadow-sm"
+              className="text-sm font-medium text-white bg-zinc-900 hover:bg-zinc-800 dark:bg-zinc-50 dark:text-zinc-900 dark:hover:bg-zinc-200 px-4 py-2 rounded-xl transition-colors duration-200 shadow-xs"
             >
               Get in Touch
             </a>
@@ -255,7 +254,7 @@ export default function Header() {
           <a
             href="#contact"
             onClick={() => setIsOpen(false)}
-            className="text-base font-medium text-white bg-zinc-900 hover:bg-zinc-800 dark:bg-zinc-50 dark:text-zinc-900 dark:hover:bg-zinc-200 px-4 py-2.5 rounded-full text-center transition-all duration-200 shadow-sm mt-2"
+            className="text-base font-medium text-white bg-zinc-900 hover:bg-zinc-800 dark:bg-zinc-50 dark:text-zinc-900 dark:hover:bg-zinc-200 px-4 py-2.5 rounded-xl text-center transition-colors duration-200 shadow-xs mt-2"
           >
             Get in Touch
           </a>
