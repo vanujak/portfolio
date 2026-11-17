@@ -3,7 +3,6 @@
 import { useState, useEffect, useRef } from "react";
 
 export default function Hero() {
-  const basePath = process.env.NEXT_PUBLIC_IS_STATIC_EXPORT === 'true' ? '/portfolio' : '';
   const inputRef = useRef(null);
   const logsRef = useRef(null);
 
@@ -121,7 +120,7 @@ export default function Hero() {
                 Explore Projects
               </a>
               <a
-                href={`${basePath}/Vanuja_Karunaratne_CV.pdf`}
+                href="/Vanuja_Karunaratne_CV.pdf"
                 download="Vanuja_Karunaratne_CV.pdf"
                 target="_blank"
                 rel="noopener noreferrer"

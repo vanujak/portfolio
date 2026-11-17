@@ -5,7 +5,6 @@ import Image from "next/image";
 
 export default function About() {
   const [activeModal, setActiveModal] = useState(null);
-  const basePath = process.env.NEXT_PUBLIC_IS_STATIC_EXPORT === 'true' ? '/portfolio' : '';
 
   useEffect(() => {
     if (activeModal) {
@@ -152,7 +151,7 @@ export default function About() {
           <div className="lg:col-span-5 flex justify-center">
             <div className="relative w-48 h-48 sm:w-72 sm:h-72 lg:w-80 lg:h-80 rounded-2xl overflow-hidden border border-zinc-200 dark:border-zinc-800 shadow-md bg-background-secondary">
               <Image
-                src={`${basePath}/profile.png`}
+                src="/profile.png"
                 alt="Vanuja Karunaratne"
                 fill
                 className="object-cover"

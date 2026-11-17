@@ -3,8 +3,6 @@
 import Image from "next/image";
 
 export default function Certificates() {
-  const basePath =
-    process.env.NEXT_PUBLIC_IS_STATIC_EXPORT === "true" ? "/portfolio" : "";
   const certificates = [
     {
       type: "Certification",
@@ -26,7 +24,7 @@ export default function Certificates() {
       credentialId: "UC-108eaebf-7829-4316-ae35-0f2320ec9b3b",
       verifyLink:
         "https://www.udemy.com/certificate/UC-108eaebf-7829-4316-ae35-0f2320ec9b3b/",
-      logoImage: `${basePath}/certificates/udemy-logo.webp`,
+      logoImage: "/certificates/udemy-logo.webp",
       category: "Software Engineering",
     },
     {
@@ -35,8 +33,8 @@ export default function Certificates() {
       issuer: "Namaste Dev",
       date: "2026",
       credentialId: "E8963B37961D36B32D76697DA6B",
-      verifyLink: `${basePath}/certificates/namasteNode.webp`,
-      logoImage: `${basePath}/certificates/namastedev-logo.png`,
+      verifyLink: "/certificates/namasteNode.webp",
+      logoImage: "/certificates/namastedev-logo.png",
       category: "Backend Development",
     },
     {
@@ -45,8 +43,8 @@ export default function Certificates() {
       issuer: "Namaste Dev",
       date: "2026",
       credentialId: "E8963B37961D36B32D76697D84B",
-      verifyLink: `${basePath}/certificates/namasteJavaScript.webp`,
-      logoImage: `${basePath}/certificates/namastedev-logo.png`,
+      verifyLink: "/certificates/namasteJavaScript.webp",
+      logoImage: "/certificates/namastedev-logo.png",
       category: "Programming",
     },
   ];

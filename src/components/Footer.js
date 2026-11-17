@@ -141,10 +141,9 @@ export default function Footer() {
                     Effective Date: July 9, 2026
                   </p>
                   <p>
-                    This portfolio website is a static showcase constructed
-                    using Next.js, styled with Tailwind CSS, and hosted via
-                    GitHub Pages. I am committed to protecting your online
-                    privacy.
+                    This portfolio website is a showcase constructed using
+                    Next.js and styled with Tailwind CSS. I am committed to
+                    protecting your online privacy.
                   </p>
 
                   <h4 className="font-bold text-zinc-800 dark:text-zinc-200 mt-4">

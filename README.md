@@ -2,17 +2,14 @@
 
 Welcome to the repository for my professional portfolio website! This site is designed to showcase my projects, technical stack, certifications, work history, and live coding stats in an interactive and premium user experience.
 
-🔗 **Live Website**: [vanujak.github.io/portfolio](https://vanujak.github.io/portfolio)
-
 ---
 
 ## 🛠️ Technology Stack
 
-* **Framework**: [Next.js 15](https://nextjs.org/) (Static HTML Export)
+* **Framework**: [Next.js](https://nextjs.org/)
 * **Library**: [React 19](https://react.dev/)
 * **Styling**: [Tailwind CSS v4](https://tailwindcss.com/) (Modern CSS theme directives)
 * **Real-time Metrics**: Dynamic API client-side integrations with GitHub & LeetCode.
-* **Deployment & Hosting**: Automated CI/CD via [GitHub Actions](https://github.com/features/actions) to [GitHub Pages](https://pages.github.com/).
 
 ---
 
@@ -34,7 +31,6 @@ Welcome to the repository for my professional portfolio website! This site is de
 
 ```text
 portfolio/
-├── .github/workflows/   # CI/CD deployment configuration for GitHub Pages
 ├── public/              # Static media assets (PDF CV, screenshots, logos)
 │   ├── certificates/    # Certified credentials PDFs
 │   ├── experience/      # Company logos (e.g., slt.webp)
@@ -82,23 +78,12 @@ Open [http://localhost:3000](http://localhost:3000) in your web browser to view 
 
 ---
 
-## 🏗️ Building and Deployment
+## 🏗️ Building
 
-This project is configured as a **Static HTML Export** to run on serverless environments like GitHub Pages.
-
-### Manual Static Build
-To compile the site manually and inspect the output static bundle:
+To compile the site:
 ```bash
 npm run build
 ```
-This generates the optimized static files inside the `/out` directory.
-
-### Automated CI/CD Deployment
-A GitHub Actions workflow (**`deploy.yml`**) automates deployment. 
-Whenever code is pushed to the **`main`** branch:
-1. The runner boots a Node environment and checks out the repository.
-2. It compiles the Next.js code using `npm run build` and exports static files.
-3. The static output is automatically published to the GitHub Pages environment.
 
 ---
 

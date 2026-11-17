@@ -5,7 +5,6 @@ import Image from "next/image";
 
 export default function Projects() {
   const [activeProject, setActiveProject] = useState(null);
-  const basePath = process.env.NEXT_PUBLIC_IS_STATIC_EXPORT === 'true' ? '/portfolio' : '';
 
   const projects = [
     {
@@ -99,7 +98,7 @@ export default function Projects() {
               <div className="h-36 sm:h-40 w-full bg-background dark:bg-zinc-900/50 rounded-xl mb-3.5 sm:mb-4 flex items-center justify-center relative overflow-hidden border border-zinc-200/50 dark:border-zinc-800/50">
                 {project.image ? (
                   <Image
-                    src={`${basePath}${project.image}`}
+                    src={project.image}
                     alt={project.title}
                     fill
                     className="object-cover"

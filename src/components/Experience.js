@@ -6,12 +6,11 @@ import Image from "next/image";
 // Sub-component to handle image loading state and fallback robustly
 function CompanyLogo({ src, alt, fallbackText }) {
   const [hasError, setHasError] = useState(false);
-  const basePath = process.env.NEXT_PUBLIC_IS_STATIC_EXPORT === 'true' ? '/portfolio' : '';
 
   if (src && !hasError) {
     return (
       <Image
-        src={`${basePath}${src}`}
+        src={src}
         alt={alt}
         fill
         className="object-contain p-1.5"

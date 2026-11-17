@@ -40,11 +40,11 @@ export const metadata = {
   openGraph: {
     title: "Vanuja Karunaratne | Portfolio",
     description: "DevOps Intern at SLT-MOBITEL PLC & Computer Engineering student. Automation, cloud systems, and infrastructure builder.",
-    url: "https://vanujak.github.io/portfolio",
+    url: "/",
     siteName: "Vanuja Karunaratne Portfolio",
     images: [
       {
-        url: "https://vanujak.github.io/portfolio/og-image.png",
+        url: "/og-image.png",
         width: 1200,
         height: 630,
         alt: "Vanuja Karunaratne Portfolio Preview Card",
@@ -57,7 +57,7 @@ export const metadata = {
     card: "summary_large_image",
     title: "Vanuja Karunaratne | Portfolio",
     description: "DevOps Intern at SLT-MOBITEL PLC & Computer Engineering student. Automation, cloud systems, and infrastructure builder.",
-    images: ["https://vanujak.github.io/portfolio/og-image.png"],
+    images: ["/og-image.png"],
   },
 };
 
