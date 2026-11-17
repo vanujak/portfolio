@@ -148,10 +148,10 @@ export default function Hero() {
           </div>
 
           {/* Right Column: Interactive Terminal Widget */}
-          <div className="lg:col-span-6 w-full max-w-lg mx-auto">
+          <div className="hidden lg:block lg:col-span-6 w-full max-w-lg mx-auto">
             <div 
               onClick={focusInput}
-              className="w-full h-64 sm:h-80 rounded-2xl bg-zinc-950 border border-zinc-800 shadow-lg flex flex-col overflow-hidden text-left font-mono text-xs sm:text-sm text-zinc-300 select-none cursor-text relative group"
+              className="w-full h-80 rounded-2xl bg-zinc-950 border border-zinc-800 shadow-lg flex flex-col overflow-hidden text-left font-mono text-xs sm:text-sm text-zinc-300 select-none cursor-text relative group"
             >
               {/* Terminal Window Header Bar */}
               <div className="h-9 w-full bg-zinc-900 border-b border-zinc-800 px-4 flex items-center justify-between flex-shrink-0">
