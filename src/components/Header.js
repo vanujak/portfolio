@@ -1,23 +1,60 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [isShrunk, setIsShrunk] = useState(false);
   const [theme, setTheme] = useState('light');
+  const lastScrollY = useRef(0);
+  const scrollIdleTimer = useRef(null);
 
   useEffect(() => {
+    lastScrollY.current = window.scrollY;
+    let ticking = false;
+
     const handleScroll = () => {
-      if (window.scrollY > 20) {
-        setScrolled(true);
-      } else {
-        setScrolled(false);
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const currentScrollY = window.scrollY;
+          const delta = currentScrollY - lastScrollY.current;
+
+          setScrolled(currentScrollY > 20);
+
+          if (currentScrollY <= 20) {
+            setIsShrunk(false);
+          } else if (Math.abs(delta) > 2) {
+            if (delta > 0) {
+              setIsShrunk(true);
+            } else if (delta < -12) {
+              setIsShrunk(false);
+            }
+          }
+
+          lastScrollY.current = currentScrollY;
+          ticking = false;
+        });
+        ticking = true;
+      }
+
+      if (scrollIdleTimer.current) {
+        clearTimeout(scrollIdleTimer.current);
+      }
+      // Wait a short moment after scrolling completely stops before smoothly expanding back
+      scrollIdleTimer.current = setTimeout(() => {
+        setIsShrunk(false);
+      }, 550);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      if (scrollIdleTimer.current) {
+        clearTimeout(scrollIdleTimer.current);
       }
     };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   // Initialize theme on mount (saved preference or OS default)
@@ -69,34 +106,53 @@ export default function Header() {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 border-b transition-all duration-300 ${
+      className={`fixed top-0 left-0 right-0 z-50 border-b transition-all duration-300 md:bg-transparent md:dark:bg-transparent md:border-transparent md:dark:border-transparent md:backdrop-blur-none md:shadow-none md:pointer-events-none md:px-6 md:py-0 md:pt-4 ${
         scrolled || isOpen
           ? 'bg-white/90 dark:bg-zinc-950/90 backdrop-blur-xl border-zinc-200/70 dark:border-zinc-800/70 shadow-xs py-4'
           : 'bg-transparent border-transparent py-5'
       }`}
     >
-      <div className="max-w-6xl mx-auto px-6 flex justify-between items-center">
+      <div
+        className={`max-w-6xl mx-auto px-6 flex justify-between items-center md:pointer-events-auto md:w-fit md:max-w-fit md:rounded-full md:border md:backdrop-blur-2xl md:backdrop-saturate-150 md:origin-top md:will-change-transform md:transition-all md:duration-[650ms] md:ease-[cubic-bezier(0.22,1,0.36,1)] ${
+          isShrunk
+            ? 'md:px-4.5 md:py-1.5 md:gap-5 md:scale-[0.92] md:-translate-y-1.5 md:bg-white/85 md:dark:bg-zinc-900/85 md:border-zinc-200/90 md:dark:border-zinc-800/90 md:shadow-[0_4px_20px_rgb(0,0,0,0.08)] md:dark:shadow-[0_4px_20px_rgb(0,0,0,0.45)]'
+            : 'md:px-6 md:py-2.5 md:gap-10 md:scale-100 md:translate-y-0 md:bg-white/75 md:dark:bg-zinc-900/75 md:border-zinc-200/80 md:dark:border-zinc-800/80 md:shadow-[0_8px_30px_rgb(0,0,0,0.06)] md:dark:shadow-[0_8px_30px_rgb(0,0,0,0.35)]'
+        }`}
+      >
         {/* Logo */}
-        <Link href="#" className="text-xl font-bold tracking-tight text-zinc-900 dark:text-zinc-50 hover:opacity-80 transition-opacity">
+        <Link
+          href="#"
+          className="text-xl font-bold tracking-tight text-zinc-900 dark:text-zinc-50 hover:opacity-80 transition-opacity"
+        >
           Portfolio<span className="text-indigo-600 dark:text-indigo-400">.</span>
         </Link>
 
         {/* Right Actions (Nav + Theme Toggle + Mobile Menu) */}
-        <div className="flex items-center gap-3">
+        <div
+          className={`flex items-center gap-3 md:transition-all md:duration-[650ms] md:ease-[cubic-bezier(0.22,1,0.36,1)] ${
+            isShrunk ? 'md:gap-1.5' : 'md:gap-2.5'
+          }`}
+        >
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center gap-8 mr-2">
+          <nav
+            className={`hidden md:flex items-center md:transition-all md:duration-[650ms] md:ease-[cubic-bezier(0.22,1,0.36,1)] ${
+              isShrunk ? 'md:gap-4 md:mr-0.5' : 'md:gap-6 md:mr-1'
+            }`}
+          >
             {navLinks.map((link) => (
               <a
                 key={link.name}
                 href={link.href}
-                className="text-sm font-medium text-zinc-600 dark:text-zinc-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors"
+                className="text-sm font-medium text-zinc-600 dark:text-zinc-300 hover:text-indigo-600 dark:hover:text-indigo-400 whitespace-nowrap transition-colors"
               >
                 {link.name}
               </a>
             ))}
             <a
               href="#contact"
-              className="text-sm font-medium text-white bg-zinc-900 hover:bg-zinc-800 dark:bg-zinc-50 dark:text-zinc-900 dark:hover:bg-zinc-200 px-4 py-2 rounded-xl transition-colors duration-200 shadow-xs"
+              className={`text-sm font-medium text-white bg-zinc-900 hover:bg-zinc-800 dark:bg-zinc-50 dark:text-zinc-900 dark:hover:bg-zinc-200 px-4 py-2 rounded-xl md:rounded-full whitespace-nowrap transition-colors duration-200 md:transition-all md:duration-[650ms] md:ease-[cubic-bezier(0.22,1,0.36,1)] shadow-xs ${
+                isShrunk ? 'md:px-3.5 md:py-1.5' : 'md:px-4 md:py-2'
+              }`}
             >
               Get in Touch
             </a>
@@ -105,7 +161,9 @@ export default function Header() {
           {/* Single-Click Theme Toggle Button */}
           <button
             onClick={toggleTheme}
-            className="p-2.5 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50/50 dark:bg-zinc-900/50 text-zinc-600 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-800/60 transition-colors duration-200 shadow-xs cursor-pointer flex items-center justify-center"
+            className={`p-2.5 rounded-xl md:rounded-full border border-zinc-200 dark:border-zinc-800 bg-zinc-50/50 dark:bg-zinc-900/50 text-zinc-600 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-800/60 transition-colors duration-200 md:transition-all md:duration-[650ms] md:ease-[cubic-bezier(0.22,1,0.36,1)] shadow-xs cursor-pointer flex items-center justify-center ${
+              isShrunk ? 'md:p-1.5' : 'md:p-2'
+            }`}
             aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
             title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
           >
