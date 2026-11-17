@@ -52,31 +52,6 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* Custom ambient glow animations */
-@keyframes ambient-glow {
-  0%, 100% {
-    transform: translate(0, 0) scale(1);
-    opacity: 0.8;
-  }
-  50% {
-    transform: translate(15px, -25px) scale(1.05);
-    opacity: 1;
-  }
-}
-
-.animate-ambient-1 {
-  animation: ambient-glow 10s ease-in-out infinite;
-}
-.animate-ambient-2 {
-  animation: ambient-glow 14s ease-in-out infinite;
-}
-.animate-ambient-3 {
-  animation: ambient-glow 12s ease-in-out infinite;
-}
-.animate-ambient-4 {
-  animation: ambient-glow 11s ease-in-out infinite;
-}
-
 /* Global dot grid pattern */
 .bg-dot-grid {
   background-image: radial-gradient(#8080801c 1.5px, transparent 1.5px);

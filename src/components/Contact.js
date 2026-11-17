@@ -57,27 +57,27 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="py-24 bg-transparent">
-      <div className="max-w-6xl mx-auto px-6">
-        <div className="text-center max-w-2xl mx-auto mb-16">
+    <section id="contact" className="py-10 sm:py-14 lg:py-16 bg-transparent">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6">
+        <div className="text-center max-w-2xl mx-auto mb-6 sm:mb-10">
           <span className="text-xs uppercase tracking-widest font-bold text-indigo-600 dark:text-indigo-400">
             Get In Touch
           </span>
-          <h2 className="text-3xl sm:text-4xl font-bold text-zinc-900 dark:text-zinc-50 mt-2">
+          <h2 className="text-2xl sm:text-4xl font-bold text-zinc-900 dark:text-zinc-50 mt-1.5">
             Let's Start a Conversation
           </h2>
-          <p className="text-zinc-600 dark:text-zinc-400 mt-4">
+          <p className="text-zinc-600 dark:text-zinc-400 mt-2 text-sm sm:text-base">
             Have a project in mind, want to collaborate, or just say hello? Drop
             me a message.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-10">
           {/* Info Column */}
           <div className="lg:col-span-5 flex flex-col justify-between">
-            <div className="space-y-8">
+            <div className="space-y-5 sm:space-y-8">
               <div>
-                <h3 className="text-lg font-bold text-zinc-900 dark:text-zinc-50 mb-2">
+                <h3 className="text-base sm:text-lg font-bold text-zinc-900 dark:text-zinc-50 mb-1.5 sm:mb-2">
                   Contact Information
                 </h3>
                 <p className="text-sm text-zinc-600 dark:text-zinc-400 max-w-xs leading-relaxed">
@@ -86,7 +86,7 @@ export default function Contact() {
                 </p>
               </div>
 
-              <div className="space-y-4">
+              <div className="space-y-3 sm:space-y-4">
                 <div className="flex items-center gap-4">
                   <div className="w-10 h-10 rounded-full bg-indigo-50 dark:bg-indigo-950/40 border border-indigo-100/50 dark:border-indigo-900/30 flex items-center justify-center text-indigo-600 dark:text-indigo-400">
                     <svg
@@ -185,7 +185,7 @@ export default function Contact() {
             </div>
 
             {/* Social handles */}
-            <div className="mt-8 lg:mt-0 flex gap-4 flex-wrap">
+            <div className="mt-5 sm:mt-8 lg:mt-0 flex gap-3 sm:gap-4 flex-wrap">
               {["github", "linkedin", "twitter", "instagram", "discord"].map(
                 (platform) => (
                   <a
@@ -252,7 +252,7 @@ export default function Contact() {
           <div className="lg:col-span-7">
             <form
               onSubmit={handleSubmit}
-              className="bg-background-secondary border border-zinc-200/50 dark:border-zinc-800/50 rounded-3xl p-6 sm:p-8 space-y-6"
+              className="bg-background-secondary border border-zinc-200/50 dark:border-zinc-800/50 rounded-2xl sm:rounded-3xl p-4 sm:p-6 space-y-3.5 sm:space-y-4"
             >
               <div>
                 <label
@@ -303,7 +303,7 @@ export default function Contact() {
                   name="message"
                   id="message"
                   required
-                  rows={5}
+                  rows={4}
                   value={formState.message}
                   onChange={handleChange}
                   placeholder="Tell me about your project..."

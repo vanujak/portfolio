@@ -57,8 +57,8 @@ export default function Footer() {
 
   return (
     <>
-      <footer className="bg-background-secondary/30 backdrop-blur-[2px] border-t border-zinc-200/20 dark:border-zinc-800/20 py-12 relative z-30">
-        <div className="max-w-6xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
+      <footer className="bg-background-secondary/30 backdrop-blur-[2px] border-t border-zinc-200/20 dark:border-zinc-800/20 py-6 sm:py-8 relative z-30">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col md:flex-row justify-between items-center gap-4 sm:gap-6">
           {/* Logo / Brand */}
           <div className="flex items-center gap-2">
             <span className="text-base font-bold tracking-tight text-zinc-900 dark:text-zinc-50">

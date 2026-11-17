@@ -203,32 +203,32 @@ export default function CodingStats({
   };
 
   return (
-    <section id="coding-stats" className="py-24 bg-transparent">
-      <div className="max-w-6xl mx-auto px-6">
+    <section id="coding-stats" className="py-10 sm:py-14 lg:py-16 bg-transparent">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6">
         {/* Section Header */}
-        <div className="text-center max-w-2xl mx-auto mb-16">
+        <div className="text-center max-w-2xl mx-auto mb-6 sm:mb-10">
           <span className="text-xs uppercase tracking-widest font-bold text-indigo-600 dark:text-indigo-400">
             Metrics
           </span>
-          <h2 className="text-3xl sm:text-4xl font-bold text-zinc-900 dark:text-zinc-50 mt-2">
+          <h2 className="text-2xl sm:text-4xl font-bold text-zinc-900 dark:text-zinc-50 mt-1.5">
             Coding Activity & Stats
           </h2>
-          <p className="text-zinc-600 dark:text-zinc-400 mt-4">
+          <p className="text-zinc-600 dark:text-zinc-400 mt-2 text-sm sm:text-base">
             Live developer metrics fetched dynamically from my public GitHub and
             LeetCode profiles.
           </p>
         </div>
 
         {/* Dashboard Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 items-stretch">
           {/* NATIVE GITHUB CARD */}
-          <div className="flex flex-col bg-background-secondary/35 border border-zinc-200/40 dark:border-zinc-800/30 rounded-3xl p-6 sm:p-8 hover:scale-[1.01] hover:border-indigo-500/50 dark:hover:border-indigo-400/50 transition-all duration-300 shadow-xs justify-between">
+          <div className="flex flex-col bg-background-secondary/35 border border-zinc-200/40 dark:border-zinc-800/30 rounded-2xl sm:rounded-3xl p-4 sm:p-6 hover:scale-[1.01] hover:border-indigo-500/50 dark:hover:border-indigo-400/50 transition-all duration-300 shadow-xs justify-between">
             <div>
               {/* Card Header */}
-              <div className="flex items-center justify-between border-b border-zinc-200/30 dark:border-zinc-800/30 pb-5 mb-6">
+              <div className="flex items-center justify-between border-b border-zinc-200/30 dark:border-zinc-800/30 pb-3 sm:pb-4 mb-4 sm:mb-5">
                 <div className="flex items-center gap-3">
-                  <span className="text-2xl">🐙</span>
-                  <h3 className="text-lg font-bold text-zinc-900 dark:text-zinc-50">
+                  <span className="text-xl sm:text-2xl">🐙</span>
+                  <h3 className="text-base sm:text-lg font-bold text-zinc-900 dark:text-zinc-50">
                     GitHub Dev Metrics
                   </h3>
                 </div>
@@ -236,27 +236,27 @@ export default function CodingStats({
               </div>
 
               {/* Profile details */}
-              <div className="flex flex-col sm:flex-row items-center gap-5 mb-6">
+              <div className="flex flex-row items-center gap-3.5 sm:gap-5 mb-4 sm:mb-6">
                 <img
                   src={ghStats.avatar_url}
                   alt={ghStats.name}
-                  className="w-20 h-20 rounded-full border-2 border-indigo-500/20 shadow-sm"
+                  className="w-14 h-14 sm:w-20 sm:h-20 rounded-full border-2 border-indigo-500/20 shadow-sm shrink-0"
                 />
-                <div className="text-center sm:text-left">
-                  <h4 className="text-base font-bold text-zinc-900 dark:text-zinc-50">
+                <div className="text-left min-w-0">
+                  <h4 className="text-sm sm:text-base font-bold text-zinc-900 dark:text-zinc-50 truncate">
                     {ghStats.name}
                   </h4>
                   <p className="text-xs text-zinc-500 dark:text-zinc-500 font-medium mt-0.5">
                     {ghStats.location}
                   </p>
-                  <p className="text-sm text-zinc-600 dark:text-zinc-450 mt-2 max-w-sm">
+                  <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 mt-1 sm:mt-2 line-clamp-2">
                     {ghStats.bio}
                   </p>
                 </div>
               </div>
 
               {/* Dynamic Stats Numbers */}
-              <div className="grid grid-cols-3 gap-4 bg-background/50 dark:bg-zinc-900/30 border border-zinc-200/30 dark:border-zinc-800/20 p-4 rounded-2xl">
+              <div className="grid grid-cols-3 gap-2 sm:gap-4 bg-background/50 dark:bg-zinc-900/30 border border-zinc-200/30 dark:border-zinc-800/20 p-3 sm:p-4 rounded-2xl">
                 <div className="text-center">
                   <div className="text-xl sm:text-2xl font-black text-indigo-600 dark:text-indigo-400">
                     {ghStats.totalContributions.toLocaleString()}
@@ -299,7 +299,7 @@ export default function CodingStats({
               </div>
             </div>
 
-            <div className="mt-8 pt-4 border-t border-zinc-200/30 dark:border-zinc-800/30 flex justify-end">
+            <div className="mt-5 pt-3 border-t border-zinc-200/30 dark:border-zinc-800/30 flex justify-end">
               <a
                 href="https://github.com/vanujak"
                 target="_blank"
@@ -325,13 +325,13 @@ export default function CodingStats({
           </div>
 
           {/* NATIVE LEETCODE CARD */}
-          <div className="flex flex-col bg-background-secondary/35 border border-zinc-200/40 dark:border-zinc-800/30 rounded-3xl p-6 sm:p-8 hover:scale-[1.01] hover:border-indigo-500/50 dark:hover:border-indigo-400/50 transition-all duration-300 shadow-xs justify-between">
+          <div className="flex flex-col bg-background-secondary/35 border border-zinc-200/40 dark:border-zinc-800/30 rounded-2xl sm:rounded-3xl p-4 sm:p-6 hover:scale-[1.01] hover:border-indigo-500/50 dark:hover:border-indigo-400/50 transition-all duration-300 shadow-xs justify-between">
             <div>
               {/* Card Header */}
-              <div className="flex items-center justify-between border-b border-zinc-200/30 dark:border-zinc-800/30 pb-5 mb-6">
+              <div className="flex items-center justify-between border-b border-zinc-200/30 dark:border-zinc-800/30 pb-3 sm:pb-4 mb-4 sm:mb-5">
                 <div className="flex items-center gap-3">
-                  <span className="text-2xl">🟨</span>
-                  <h3 className="text-lg font-bold text-zinc-900 dark:text-zinc-50">
+                  <span className="text-xl sm:text-2xl">🟨</span>
+                  <h3 className="text-base sm:text-lg font-bold text-zinc-900 dark:text-zinc-50">
                     LeetCode Algorithmic Stats
                   </h3>
                 </div>
@@ -339,11 +339,11 @@ export default function CodingStats({
               </div>
 
               {/* Progress Display */}
-              <div className="flex flex-col sm:flex-row items-center gap-8 mb-6">
+              <div className="flex flex-row items-center gap-4 sm:gap-8 mb-4 sm:mb-6">
                 {/* Total Circle */}
-                <div className="relative w-32 h-32 flex items-center justify-center rounded-full border-4 border-zinc-150 dark:border-zinc-800 bg-background/50 flex-shrink-0">
+                <div className="relative w-24 h-24 sm:w-32 sm:h-32 flex items-center justify-center rounded-full border-4 border-zinc-200 dark:border-zinc-800 bg-background/50 flex-shrink-0">
                   <div className="text-center">
-                    <div className="text-3xl font-black text-zinc-900 dark:text-zinc-50">
+                    <div className="text-2xl sm:text-3xl font-black text-zinc-900 dark:text-zinc-50">
                       {lcStats.totalSolved}
                     </div>
                     <div className="text-[10px] font-bold text-zinc-400 dark:text-zinc-500 uppercase mt-0.5">
@@ -353,7 +353,7 @@ export default function CodingStats({
                 </div>
 
                 {/* Categories Progress Bars */}
-                <div className="flex-grow space-y-4 w-full">
+                <div className="flex-grow space-y-2.5 sm:space-y-4 w-full min-w-0">
                   {/* Easy */}
                   <div>
                     <div className="flex justify-between text-xs font-bold text-zinc-500 dark:text-zinc-400 mb-1">
@@ -411,7 +411,7 @@ export default function CodingStats({
               </div>
 
               {/* Dynamic Stats Grid (Symmetric to GitHub Card) */}
-              <div className="grid grid-cols-3 gap-4 bg-background/50 dark:bg-zinc-900/30 border border-zinc-200/30 dark:border-zinc-800/20 p-4 rounded-2xl mt-8">
+              <div className="grid grid-cols-3 gap-2 sm:gap-4 bg-background/50 dark:bg-zinc-900/30 border border-zinc-200/30 dark:border-zinc-800/20 p-3 sm:p-4 rounded-2xl mt-4 sm:mt-5">
                 <div className="text-center">
                   <div className="text-xl sm:text-2xl font-black text-indigo-600 dark:text-indigo-400">
                     {lcStats.acceptanceRate}%
@@ -441,7 +441,7 @@ export default function CodingStats({
               </div>
             </div>
 
-            <div className="mt-8 pt-4 border-t border-zinc-200/30 dark:border-zinc-800/30 flex justify-end">
+            <div className="mt-5 pt-3 border-t border-zinc-200/30 dark:border-zinc-800/30 flex justify-end">
               <a
                 href="https://leetcode.com/u/vanujak/"
                 target="_blank"

@@ -73,30 +73,30 @@ export default function Projects() {
   };
 
   return (
-    <section id="projects" className="py-24 bg-transparent">
-      <div className="max-w-6xl mx-auto px-6">
-        <div className="text-center max-w-2xl mx-auto mb-16">
+    <section id="projects" className="py-10 sm:py-14 lg:py-16 bg-transparent">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6">
+        <div className="text-center max-w-2xl mx-auto mb-6 sm:mb-10">
           <span className="text-xs uppercase tracking-widest font-bold text-indigo-600 dark:text-indigo-400">
             My Portfolio
           </span>
-          <h2 className="text-3xl sm:text-4xl font-bold text-zinc-900 dark:text-zinc-50 mt-2">
+          <h2 className="text-2xl sm:text-4xl font-bold text-zinc-900 dark:text-zinc-50 mt-1.5">
             Featured Projects
           </h2>
-          <p className="text-zinc-600 dark:text-zinc-400 mt-4">
+          <p className="text-zinc-600 dark:text-zinc-400 mt-2 text-sm sm:text-base">
             A selection of my recent works. Each project represents different
             engineering challenges and how they were solved.
           </p>
         </div>
 
         {/* Projects Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
           {projects.map((project, index) => (
             <div
               key={index}
-              className="group flex flex-col h-full bg-background-secondary border border-zinc-200/50 dark:border-zinc-800/50 rounded-2xl p-6 hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
+              className="group flex flex-col h-full bg-background-secondary border border-zinc-200/50 dark:border-zinc-800/50 rounded-2xl p-4 sm:p-5 hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
             >
               {/* Card visual header */}
-              <div className="h-44 w-full bg-background dark:bg-zinc-900/50 rounded-xl mb-6 flex items-center justify-center relative overflow-hidden">
+              <div className="h-36 sm:h-40 w-full bg-background dark:bg-zinc-900/50 rounded-xl mb-3.5 sm:mb-4 flex items-center justify-center relative overflow-hidden">
                 {project.image ? (
                   <Image
                     src={`${basePath}${project.image}`}
@@ -121,8 +121,6 @@ export default function Projects() {
                         d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
                       />
                     </svg>
-                    {/* Visual glow on hover */}
-                    <div className="absolute inset-0 bg-indigo-500/5 dark:bg-indigo-400/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   </>
                 )}
               </div>
@@ -133,12 +131,12 @@ export default function Projects() {
               </h3>
 
               {/* Description */}
-              <p className="text-zinc-650 dark:text-zinc-400 text-sm leading-relaxed mb-6 flex-grow">
+              <p className="text-zinc-600 dark:text-zinc-400 text-sm leading-relaxed mb-4 flex-grow">
                 {project.description}
               </p>
 
               {/* Tags */}
-              <div className="flex flex-wrap gap-2 mb-6">
+              <div className="flex flex-wrap gap-1.5 mb-4">
                 {project.tags.map((tag, tIndex) => (
                   <span
                     key={tIndex}

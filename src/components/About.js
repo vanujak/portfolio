@@ -73,19 +73,19 @@ export default function About() {
   };
 
   return (
-    <section id="about" className="py-24 bg-background-secondary/30 border-y border-zinc-200/20 dark:border-zinc-800/20 relative">
-      <div className="max-w-6xl mx-auto px-6">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+    <section id="about" className="py-10 sm:py-14 lg:py-16 bg-background-secondary/30 border-y border-zinc-200/20 dark:border-zinc-800/20 relative">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-10 items-center">
           {/* Text Content */}
           <div className="lg:col-span-7">
             <span className="text-xs uppercase tracking-widest font-bold text-indigo-600 dark:text-indigo-400">
               About Me
             </span>
-            <h2 className="text-3xl sm:text-4xl font-bold text-zinc-900 dark:text-zinc-50 mt-2 mb-6">
+            <h2 className="text-2xl sm:text-3xl font-bold text-zinc-900 dark:text-zinc-50 mt-1.5 mb-3 sm:mb-4">
               Bridging the gap between software development and automated
               infrastructure.
             </h2>
-            <div className="space-y-4 text-zinc-600 dark:text-zinc-400 leading-relaxed">
+            <div className="space-y-2.5 sm:space-y-3 text-sm sm:text-base text-zinc-600 dark:text-zinc-400 leading-relaxed">
               <p>
                 I am a Computer Engineering undergraduate at the University of
                 Ruhuna, deeply focused on DevOps practices and automated cloud
@@ -101,8 +101,7 @@ export default function About() {
                 and Node.js.
               </p>
               <p>
-                Currently, I am expanding my boundaries into **MLOps (Machine
-                Learning Operations)**. I am passionate about automating the
+                Currently, I am expanding my boundaries into <strong className="font-semibold text-zinc-900 dark:text-zinc-200">MLOps (Machine Learning Operations)</strong>. I am passionate about automating the
                 integration of machine learning models into production—building
                 robust pipelines to handle model training, deployment, tracking,
                 and continuous monitoring.
@@ -110,17 +109,17 @@ export default function About() {
             </div>
 
             {/* Stats Grid */}
-            <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mt-10">
+            <div className="grid grid-cols-2 md:grid-cols-5 gap-2.5 sm:gap-3 mt-5 sm:mt-6">
               {stats.map((stat, index) => (
                 <button
                   key={index}
                   onClick={() => setActiveModal(stat.id)}
-                  className="bg-background p-4 rounded-2xl border border-zinc-200/50 dark:border-zinc-800/50 shadow-sm text-left hover:scale-[1.03] hover:border-indigo-500/50 dark:hover:border-indigo-400/50 hover:shadow-md transition-all duration-200 cursor-pointer w-full group focus:outline-none col-span-1 last:col-span-2 md:last:col-span-1"
+                  className="bg-background p-3 sm:p-3.5 rounded-2xl border border-zinc-200/50 dark:border-zinc-800/50 shadow-sm text-left hover:scale-[1.03] hover:border-indigo-500/50 dark:hover:border-indigo-400/50 hover:shadow-md transition-all duration-200 cursor-pointer w-full group focus:outline-none col-span-1 last:col-span-2 md:last:col-span-1"
                 >
-                  <div className="text-2xl sm:text-3xl font-extrabold text-indigo-600 dark:text-indigo-400 group-hover:text-indigo-500 transition-colors">
+                  <div className="text-xl sm:text-3xl font-extrabold text-indigo-600 dark:text-indigo-400 group-hover:text-indigo-500 transition-colors">
                     {stat.value}
                   </div>
-                  <div className="text-xs font-medium text-zinc-500 dark:text-zinc-500 mt-1 flex items-center justify-between">
+                  <div className="text-xs font-medium text-zinc-500 dark:text-zinc-500 mt-0.5 sm:mt-1 flex items-center justify-between">
                     <span>{stat.label}</span>
                     <span className="text-[10px] text-indigo-500 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap ml-1">More →</span>
                   </div>
@@ -131,7 +130,7 @@ export default function About() {
 
           {/* Profile Photo Detail */}
           <div className="lg:col-span-5 flex justify-center">
-            <div className="relative w-64 h-64 sm:w-80 sm:h-80 rounded-3xl overflow-hidden border-4 border-white dark:border-zinc-800 shadow-xl bg-background-secondary">
+            <div className="relative w-48 h-48 sm:w-72 sm:h-72 lg:w-80 lg:h-80 rounded-3xl overflow-hidden border-4 border-white dark:border-zinc-800 shadow-xl bg-background-secondary">
               <Image
                 src={`${basePath}/profile.png`}
                 alt="Vanuja Karunaratne"

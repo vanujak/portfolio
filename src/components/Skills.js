@@ -176,37 +176,37 @@ export default function Skills() {
   };
 
   return (
-    <section id="skills" className="py-24 bg-background-secondary/30 border-y border-zinc-200/20 dark:border-zinc-800/20">
-      <div className="max-w-6xl mx-auto px-6">
-        <div className="text-center max-w-2xl mx-auto mb-16">
+    <section id="skills" className="py-10 sm:py-14 lg:py-16 bg-background-secondary/30 border-y border-zinc-200/20 dark:border-zinc-800/20">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6">
+        <div className="text-center max-w-2xl mx-auto mb-6 sm:mb-10">
           <span className="text-xs uppercase tracking-widest font-bold text-indigo-600 dark:text-indigo-400">
             Expertise
           </span>
-          <h2 className="text-3xl sm:text-4xl font-bold text-zinc-900 dark:text-zinc-50 mt-2">
+          <h2 className="text-2xl sm:text-4xl font-bold text-zinc-900 dark:text-zinc-50 mt-1.5">
             Technical Skills
           </h2>
-          <p className="text-zinc-600 dark:text-zinc-400 mt-4">
+          <p className="text-zinc-600 dark:text-zinc-400 mt-2 text-sm sm:text-base">
             A verified directory of technologies, libraries, and automated tooling I work with.
           </p>
         </div>
 
         {/* Categories Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6">
           {skillCategories.map((category, index) => (
             <div
               key={index}
-              className="bg-background/80 dark:bg-zinc-950/40 border border-zinc-200/30 dark:border-zinc-900/30 rounded-3xl p-6 sm:p-8 flex flex-col h-full shadow-xs"
+              className="bg-background/80 dark:bg-zinc-950/40 border border-zinc-200/30 dark:border-zinc-900/30 rounded-2xl sm:rounded-3xl p-4 sm:p-6 flex flex-col h-full shadow-xs"
             >
-              <h3 className="text-base font-bold text-zinc-900 dark:text-zinc-50 border-b border-zinc-200/30 dark:border-zinc-900/30 pb-4 mb-6 uppercase tracking-wider text-xs">
+              <h3 className="text-base font-bold text-zinc-900 dark:text-zinc-50 border-b border-zinc-200/30 dark:border-zinc-900/30 pb-2.5 sm:pb-3 mb-3 sm:mb-4 uppercase tracking-wider text-xs">
                 {category.title}
               </h3>
 
-              {/* Skills Grid - 2 columns inside each category */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              {/* Skills Grid - 2 columns on mobile & desktop */}
+              <div className="grid grid-cols-2 gap-2 sm:gap-2.5">
                 {category.skills.map((skill, sIndex) => (
                   <div
                     key={sIndex}
-                    className="flex items-center gap-3 bg-background/50 dark:bg-zinc-900/10 border border-zinc-200/40 dark:border-zinc-800/40 rounded-2xl p-3.5 hover:scale-[1.02] hover:border-indigo-500/50 dark:hover:border-indigo-400/50 hover:shadow-xs transition-all duration-300 group"
+                    className="flex items-center gap-2.5 sm:gap-3 bg-background/50 dark:bg-zinc-900/10 border border-zinc-200/40 dark:border-zinc-800/40 rounded-xl p-2 sm:p-2.5 hover:scale-[1.02] hover:border-indigo-500/50 dark:hover:border-indigo-400/50 hover:shadow-xs transition-all duration-300 group"
                   >
                     {/* SVG Icon on Left */}
                     <div className="flex-shrink-0 text-zinc-500 dark:text-zinc-450 group-hover:scale-110 transition-transform duration-300">

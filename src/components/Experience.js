@@ -49,35 +49,35 @@ export default function Experience() {
   ];
 
   return (
-    <section id="experience" className="py-24 bg-transparent">
-      <div className="max-w-4xl mx-auto px-6">
-        <div className="text-center max-w-2xl mx-auto mb-16">
+    <section id="experience" className="py-10 sm:py-14 lg:py-16 bg-transparent">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6">
+        <div className="text-center max-w-2xl mx-auto mb-6 sm:mb-10">
           <span className="text-xs uppercase tracking-widest font-bold text-indigo-600 dark:text-indigo-400">
             Professional Journey
           </span>
-          <h2 className="text-3xl sm:text-4xl font-bold text-zinc-900 dark:text-zinc-50 mt-2">
+          <h2 className="text-2xl sm:text-4xl font-bold text-zinc-900 dark:text-zinc-50 mt-1.5">
             Work Experience
           </h2>
-          <p className="text-zinc-600 dark:text-zinc-400 mt-4">
+          <p className="text-zinc-600 dark:text-zinc-400 mt-2 text-sm sm:text-base">
             My career timeline in systems automation and software engineering.
           </p>
         </div>
 
         {/* Timeline Container */}
-        <div className="relative border-l border-zinc-200/50 dark:border-zinc-800/60 ml-4 sm:ml-8 pl-8 sm:pl-12 space-y-12">
+        <div className="relative sm:border-l border-zinc-200/50 dark:border-zinc-800/60 sm:ml-8 sm:pl-12 space-y-6 sm:space-y-8">
           {experiences.map((exp, index) => (
             <div key={index} className="relative group">
               
-              {/* Timeline dot marker node */}
-              <span className="absolute -left-[53px] sm:-left-[69px] top-3 flex items-center justify-center w-10 h-10 rounded-full bg-white dark:bg-zinc-950 border border-zinc-200/60 dark:border-zinc-800/80 shadow-md group-hover:scale-110 group-hover:border-indigo-500/50 dark:group-hover:border-indigo-400/50 transition-all duration-300">
+              {/* Timeline dot marker node (visible on sm+ so mobile gets full card width) */}
+              <span className="hidden sm:flex absolute -left-[69px] top-3 items-center justify-center w-10 h-10 rounded-full bg-white dark:bg-zinc-950 border border-zinc-200/60 dark:border-zinc-800/80 shadow-md group-hover:scale-110 group-hover:border-indigo-500/50 dark:group-hover:border-indigo-400/50 transition-all duration-300">
                 {exp.logo}
               </span>
 
               {/* Card content */}
-              <div className="bg-background-secondary/35 border border-zinc-200/40 dark:border-zinc-800/30 rounded-3xl p-6 sm:p-8 hover:scale-[1.01] hover:border-indigo-500/30 dark:hover:border-indigo-400/30 hover:shadow-xs transition-all duration-300">
+              <div className="bg-background-secondary/35 border border-zinc-200/40 dark:border-zinc-800/30 rounded-2xl sm:rounded-3xl p-4 sm:p-6 hover:scale-[1.01] hover:border-indigo-500/30 dark:hover:border-indigo-400/30 hover:shadow-xs transition-all duration-300">
                 
                 {/* Card Header with Company Logo */}
-                <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-zinc-200/30 dark:border-zinc-800/30 pb-5 mb-6">
+                <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 sm:gap-4 border-b border-zinc-200/30 dark:border-zinc-800/30 pb-3.5 sm:pb-4 mb-3.5 sm:mb-4">
                   <div className="flex items-center gap-4">
                     {/* Logo Wrapper Container */}
                     <div className="w-12 h-12 rounded-xl bg-background dark:bg-zinc-900 border border-zinc-200/45 dark:border-zinc-800/45 flex items-center justify-center relative overflow-hidden flex-shrink-0 shadow-xs">
